@@ -7,8 +7,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Admin Main CSS -->
     <link href="/admin/css/app.css" rel="stylesheet">
+
+    <!--Livewire Styles--->
     @livewireStyles
+
+    <!--Vue JS V2 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 </head>
 
 <body>
@@ -169,8 +177,14 @@
         </div>
     </div>
 
+    <!--Main App JS -->
     <script src="/admin/js/app.js"></script>
+
+    <!--Livewire Scripts -->
     @livewireScripts
+
+    <!--Inline Scripts -->
+    @yield('scripts')
 
 </body>
 
