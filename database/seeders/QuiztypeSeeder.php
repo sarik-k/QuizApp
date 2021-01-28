@@ -16,19 +16,19 @@ class QuiztypeSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('quiztype')->insert([
+        DB::table('quiztypes')->insert([
             'name' => 'Multiple Choice',
             'description' => 'One correct answer'
         ]);
-        DB::table('quiztype')->insert([
+        DB::table('quiztypes')->insert([
             'name' => 'Multiple Response',
             'description' => 'More than one correct answers'
         ]);
-        DB::table('quiztype')->insert([
+        DB::table('quiztypes')->insert([
             'name' => 'True or False',
             'description' => 'One correct answer'
         ]);
-        DB::table('quiztype')->insert([
+        DB::table('quiztypes')->insert([
             'name' => 'Short Text',
             'description' => 'Requires exact match'
         ]);

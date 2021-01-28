@@ -7,7 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link href="admin/css/app.css" rel="stylesheet">
+    <link href="/admin/css/app.css" rel="stylesheet">
+    @livewireStyles
 </head>
 
 <body>
@@ -34,11 +35,14 @@
 
 
 
-                    <li class="sidebar-item ">
-                        <a class="sidebar-link " href="pages-profile.html">
-                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">My
-                                Quizzes</span>
+                    <li class="sidebar-item">
+                        <a href="#quiz" data-toggle="collapse" class="sidebar-link collapsed">
+                            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Quiz</span>
                         </a>
+                        <ul id="quiz" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                            <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">All Quizzes</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="{{ route('create-quiz') }}">Create a Quiz</a></li>
+                        </ul>
                     </li>
 
                     <li class="sidebar-item">
@@ -165,7 +169,8 @@
         </div>
     </div>
 
-    <script src="admin/js/app.js"></script>
+    <script src="/admin/js/app.js"></script>
+    @livewireScripts
 
 </body>
 

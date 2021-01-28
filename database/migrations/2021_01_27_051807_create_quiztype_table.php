@@ -13,7 +13,7 @@ class CreateQuiztypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('quiztype', function (Blueprint $table) {
+        Schema::create('quiztypes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('name');
