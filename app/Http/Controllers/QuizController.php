@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use Illuminate\Http\Request;
+use App\Models\Quiztype;
+use App\Http\Requests\StoreQuizRequest;
+
 
 class QuizController extends Controller
 {
+
+    protected $quiz;
+
     /**
      * Display a listing of the resource.
      *
@@ -25,6 +31,10 @@ class QuizController extends Controller
     public function create()
     {
         //
+        $quiztypes = Quiztype::all();
+        
+        return view('admin/quiz/create')
+        ->with('quiztypes',$quiztypes);
     }
 
     /**
@@ -33,9 +43,29 @@ class QuizController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreQuizRequest $request)
     {
         //
+        $request->validated(); //Validate Request using Form Request
+
+        $newQuiz = Quiz::create([
+            'name' => request('quiz_title'),
+            'description' => request('quiz_description'),
+            'quiztype_id' => request('quiz_type'),
+            'user_id' => auth()->user()->id
+        ]);
+
+        if (request('quiz_type') == 1) {
+            return redirect()->route('create-question-multiple-choice', ['quiz_id' => $newQuiz->id])
+            ->with('quiz_id',$newQuiz->id);
+            // return view('admin/question/multiple-choice/create')
+            // ->with('quiz_id',$newquiz->id);
+        } else {
+            die(404);
+        }
+        
+        
+
     }
 
     /**

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Quiztype extends Model
 {
     use HasFactory;
+
+    public function quiz(){
+        return $this->hasMany(Quiztype::class);
+    }
 }

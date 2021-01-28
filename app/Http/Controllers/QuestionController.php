@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Question;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -25,6 +27,21 @@ class QuestionController extends Controller
     public function create()
     {
         //
+    }
+
+    public function create_multiple_choice($quiz_id)
+    {
+        //
+
+        $quiz = Quiz::findOrFail($quiz_id);
+
+        if ($quiz->quiztype_id ==    1) {
+            return view('admin/question/multiple-choice/create')
+            ->with('quiz_id',$quiz->id);
+
+        } else {
+            abort(404);
+        }
     }
 
     /**
