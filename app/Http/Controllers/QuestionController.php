@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Requests\StoreMultipleChoiceQuestionRequest;
 use App\Models\Question;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
@@ -35,7 +35,7 @@ class QuestionController extends Controller
 
         $quiz = Quiz::findOrFail($quiz_id);
 
-        if ($quiz->quiztype_id ==    1) {
+        if ($quiz->quiztype_id == 1) {
             return view('admin/question/multiple-choice/create')
             ->with('quiz_id',$quiz->id);
 
@@ -53,6 +53,13 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function store_multiple_choice(StoreMultipleChoiceQuestionRequest $request)
+    {
+        //
+        $request->validated();
+        ddd($request->request);
     }
 
     /**

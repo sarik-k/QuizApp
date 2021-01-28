@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/quiz/create', [QuizController::class, 'create'])->name('create-quiz');
     Route::post('/dashboard/quiz/create', [QuizController::class, 'store'])->name('create-quiz');
 
-    Route::get('/dashboard/question/multiple-choice/create/quizid_{quiz_id}', [QuestionController::class, 'create_multiple_choice'])->name('create-question-multiple-choice');
+    Route::get('/dashboard/quiz/{quiz_id}/question/multiple-choice/create/', [QuestionController::class, 'create_multiple_choice'])->name('create-question-multiple-choice');
+    Route::post('/dashboard/quiz/{quiz_id}/question/multiple-choice/store/', [QuestionController::class, 'store_multiple_choice'])->name('store-question-multiple-choice');
 });
 require __DIR__ . '/auth.php';
