@@ -17,8 +17,11 @@ class CreateResultsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('quiz_id');
-            $table->integer('participant_id');
+            $table->string('email');
+            $table->string('name');
             $table->json('answers');
+            $table->integer('total_questions');
+            $table->integer('correct_answers');
             $table->integer('score');
         });
     }

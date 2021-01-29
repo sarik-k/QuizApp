@@ -29,7 +29,7 @@
 
                 <ul class="sidebar-nav">
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item {{ (request()->is('dashboard')) ? 'active' : '' }}" >
                         <a class="sidebar-link" href="{{  route('dashboard')  }}">
                             <i class="align-middle" data-feather="sliders"></i> <span
                                 class="align-middle">Dashboard</span>
@@ -43,17 +43,29 @@
 
 
 
-                    <li class="sidebar-item">
-                        <a href="#quiz" data-toggle="collapse" class="sidebar-link collapsed">
+                    <li class="sidebar-item {{ (request()->is('dashboard/quiz*')) ? 'active' : '' }}">
+                        <a href="#quiz" data-toggle="collapse" class="sidebar-link" >
                             <i class="align-middle" data-feather="users"></i> <span class="align-middle">Quiz</span>
                         </a>
-                        <ul id="quiz" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-                            <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">All Quizzes</a></li>
-                            <li class="sidebar-item"><a class="sidebar-link" href="{{ route('create-quiz') }}">Create a Quiz</a></li>
+                        <ul id="quiz" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
+                            <li class="sidebar-item {{ (request()->is('dashboard/quiz')) ? 'active' : '' }}">
+                                <a class="sidebar-link" href="{{ route('list-quiz') }}">All Quizzes</a>
+                            </li>
+                            <li class="sidebar-item {{ (request()->is('dashboard/quiz/create')) ? 'active' : '' }}">
+                                <a class="sidebar-link" href="{{ route('create-quiz') }}">Create a Quiz</a>
+                            </li>
                         </ul>
                     </li>
+                    
+                    <li class="sidebar-item {{ (request()->is('dashboard/results*')) ? 'active' : '' }}">
+                        <a href="{{ route('list-results') }}" class="sidebar-link collapsed">
+                            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Results</span>
+                        </a>
+                        
+                    </li>
 
-                    <li class="sidebar-item">
+
+                    {{-- <li class="sidebar-item">
                         <a class="sidebar-link" href="pages-settings.html">
                             <i class="align-middle" data-feather="settings"></i> <span
                                 class="align-middle">Settings</span>
@@ -81,7 +93,7 @@
                             <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Sign In</a></li>
                             <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Sign Up</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
 
 
                 </ul>
@@ -179,6 +191,7 @@
 
     <!--Main App JS -->
     <script src="/admin/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
     <!--Livewire Scripts -->
     @livewireScripts

@@ -18,7 +18,8 @@ class CreateQuestionsTable extends Migration
             $table->timestamps();
             $table->integer('quiz_id');
             $table->string('title');
-            $table->boolean('true_false_answer')->nullable();
+            $table->json('answers');
+            $table->string('correct_answer');
         });
     }
 

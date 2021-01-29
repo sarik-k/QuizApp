@@ -12,7 +12,7 @@
                 </div>
                 <hr>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('create-quiz') }}">
+                    <form method="POST" action="{{ route('store-quiz') }}">
                         @csrf
 
                         <div class="row">

@@ -5,13 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 use App\Models\Quiztype;
+use App\Models\User;
 use App\Http\Requests\StoreQuizRequest;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class QuizController extends Controller
 {
 
     protected $quiz;
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]); //Make all functions pass through auth middleware, except those mentioned
+        $this->quiz = new Quiz;
+    }
 
     /**
      * Display a listing of the resource.
@@ -20,7 +29,11 @@ class QuizController extends Controller
      */
     public function index()
     {
-        //
+        //        
+        
+        $quizzes = Auth::user()->quiz()->orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.quiz.index', ['quizzes' => $quizzes]);
+
     }
 
     /**
@@ -32,9 +45,9 @@ class QuizController extends Controller
     {
         //
         $quiztypes = Quiztype::all();
-        
+
         return view('admin/quiz/create')
-        ->with('quiztypes',$quiztypes);
+            ->with('quiztypes', $quiztypes);
     }
 
     /**
@@ -56,14 +69,10 @@ class QuizController extends Controller
         ]);
 
         if (request('quiz_type') == 1) {
-            return redirect()->route('create-question-multiple-choice', ['quiz_id' => $newQuiz->id])
-            ->with('quiz_id',$newQuiz->id);
+            return redirect()->route('edit-quiz', ['quiz_id' => $newQuiz->id]);
         } else {
             die(404);
         }
-        
-        
-
     }
 
     /**
@@ -83,9 +92,15 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function edit(Quiz $quiz)
+    public function edit($quiz_id)
     {
         //
+        $quiz = Quiz::findOrFail($quiz_id);
+        if (auth()->user()->id != $quiz->user_id) {
+            abort('403');
+        }
+
+        return view('admin.quiz.multipleChoice.edit', ['quiz' => $quiz]);
     }
 
     /**

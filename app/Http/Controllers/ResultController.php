@@ -3,10 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Result;
+use App\Models\User;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ResultController extends Controller
 {
+    protected $result;
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]); //Make all functions pass through auth middleware, except those mentioned
+        $this->result = new Result;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +26,12 @@ class ResultController extends Controller
     public function index()
     {
         //
+
+        //Gets all - $results = $this->result->orderBy('created_at', 'desc')->paginate(10);
+                     
+
+        $results = Auth::user()->result()->orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.result.index', ['results' => $results]);
     }
 
     /**

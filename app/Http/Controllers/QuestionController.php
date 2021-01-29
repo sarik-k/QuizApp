@@ -33,6 +33,7 @@ class QuestionController extends Controller
     {
         //
 
+        /* Deprecetad 
         $quiz = Quiz::findOrFail($quiz_id);
 
         
@@ -43,6 +44,7 @@ class QuestionController extends Controller
         } else {
             abort(404);
         }
+        */
     }
 
     /**
@@ -60,7 +62,19 @@ class QuestionController extends Controller
     {
         //
         $request->validated();
-        ddd($request->request);
+
+        // ddd(request('question_title'));
+        
+        
+        Question::create([
+            'title' => request('question_title'),
+            'correct_answer' => request('correct_answer'),
+            'answers' => json_encode(request('answer')) ,
+            'quiz_id' => request('quiz_id')
+        ]);
+        
+        return redirect()->route('edit-quiz', ['quiz_id' => request('quiz_id')]);
+        
     }
 
     /**

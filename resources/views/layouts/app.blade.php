@@ -14,13 +14,13 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!--====== Animate CSS ======-->
-	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="/css/animate.css">
     <!--====== Line Icons CSS ======-->
-    <link rel="stylesheet" href="css/LineIcons.2.0.css">
+    <link rel="stylesheet" href="/css/LineIcons.2.0.css">
     <!--====== Bootstrap CSS ======-->
-	<link rel="stylesheet" href="css/bootstrap-5.0.5-alpha.min.css">
+	<link rel="stylesheet" href="/css/bootstrap-5.0.5-alpha.min.css">
     <!--====== Style CSS ======-->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -66,13 +66,13 @@
 
 
 	<!--====== Bootstrap js ======-->
-	<script src="js/bootstrap.bundle-5.0.0.alpha-min.js"></script>
+	<script src="/js/bootstrap.bundle-5.0.0.alpha-min.js"></script>
 
 	<!--====== wow js ======-->
-	<script src="js/wow.min.js"></script>
+	<script src="/js/wow.min.js"></script>
 
 	<!--====== Main js ======-->
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
     
     <script>
 
