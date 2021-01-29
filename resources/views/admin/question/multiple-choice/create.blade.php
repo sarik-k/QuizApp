@@ -23,7 +23,7 @@
                                     <div class="mb-3">
                                         <label for="question_title" class="form-label h4 mb-3">Question:</label>
                                         <textarea class="form-control" name="question_title" id="question_title" cols="60"
-                                            rows="10" v-model="question" autofocus ></textarea>
+                                            rows="10" v-model="question" autofocus></textarea>
                                     </div>
                                     <div class="mb3">
                                         @error('question_title')
@@ -37,8 +37,21 @@
                                     <div v-for="(answer,key) in answers" :key="key">
                                         @{{ key }} . @{{ answer . content }}
                                     </div>
+                                    <div>
+                                        <div v-for="(answer,key) in answers" :key="key">
+                                            <div v-show="correctAnswer == key" class="alert alert-success mb-3">
+                                                <div class="alert-message">
+                                                    @{{ answer . content }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <hr>
-                                    Correct Answer: @{{ correctAnswer }}
+
+
+                                    {{-- Correct Answer: @{{ correctAnswer }}.
+                                    @{{ answers[correctAnswer] }} --}}
                                 </div>
                                 <div class="col-md-8">
 
@@ -135,10 +148,11 @@
 
                 ],
 
-                correctAnswer: '',
+                correctAnswer: null,
                 errors: []
 
             },
+
             methods: {
                 addAnswer(key) {
                     let newAnswer = {
@@ -148,7 +162,7 @@
                 },
                 removeAnswer(key) {
                     if (this.correctAnswer == key) { //Clear correctAnswer if Correct Answer Option is removed
-                        this.correctAnswer = '';
+                        this.correctAnswer = null;
                     } else if (this.correctAnswer >
                         key
                     ) { //If removed answer is above correct answer, reduce correct answer value by one to match key
@@ -158,15 +172,15 @@
                     this.answers.splice(key, 1);
                 },
 
-                checkForEmptyAnswers(array){
+                checkForEmptyAnswers(array) {
                     // Function to check if content of array is empty
-                    const empty_answers = (element) => element.content === ''; 
+                    const empty_answers = (element) => element.content === '';
 
                     if (array.some(empty_answers)) { //Check if there are any empty answers
                         return true;
                     };
                 },
-                checkForDuplicateAnswers(array){
+                checkForDuplicateAnswers(array) {
 
                     //Function to check of two simple arrays have duplicates
                     function hasDuplicates(array) {
@@ -178,41 +192,41 @@
 
                     //Simplify the array
                     array.forEach(answer => {
-                        stripped_answers_array.push(answer.content); 
+                        stripped_answers_array.push(answer.content);
                     });
 
-                 
+
 
                     //Check if there are duplicates
                     if (hasDuplicates(stripped_answers_array)) {
-                          return true;
-                      }
+                        return true;
+                    }
 
 
                 },
                 validateForm: function(e) {
 
                     //Set error array to empty
-                    this.errors = []; 
+                    this.errors = [];
 
                     //Check if user has entered a question
-                    if (!this.question) { 
+                    if (!this.question) {
                         this.errors.push("A Question is required.");
                     }
 
                     //Check if user has selected a correct answer
-                    if (!this.correctAnswer) { 
+                    if (this.correctAnswer == null) {
                         this.errors.push("Please select a correct answer.");
                     }
 
                     // Check if there are empty answers
-                    if(this.checkForEmptyAnswers(this.answers)){
+                    if (this.checkForEmptyAnswers(this.answers)) {
                         this.errors.push(
                             "Please fill all the answer inputs. Delete empty answers if possible.");
                     }
 
                     // Check if there are duplucate answers
-                    if(this.checkForDuplicateAnswers(this.answers)){
+                    if (this.checkForDuplicateAnswers(this.answers)) {
                         this.errors.push(
                             "You cannot have duplicate answers!");
                     }

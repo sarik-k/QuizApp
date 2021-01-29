@@ -58,8 +58,6 @@ class QuizController extends Controller
         if (request('quiz_type') == 1) {
             return redirect()->route('create-question-multiple-choice', ['quiz_id' => $newQuiz->id])
             ->with('quiz_id',$newQuiz->id);
-            // return view('admin/question/multiple-choice/create')
-            // ->with('quiz_id',$newquiz->id);
         } else {
             die(404);
         }

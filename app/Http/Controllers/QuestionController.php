@@ -35,6 +35,7 @@ class QuestionController extends Controller
 
         $quiz = Quiz::findOrFail($quiz_id);
 
+        
         if ($quiz->quiztype_id == 1) {
             return view('admin/question/multiple-choice/create')
             ->with('quiz_id',$quiz->id);
