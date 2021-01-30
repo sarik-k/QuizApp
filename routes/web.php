@@ -21,6 +21,8 @@ Route::get('/result/{result_id}', [PagesController::class, 'showResult'])->name(
 
 Route::post('/quiz/multiple-choice/submit', [PagesController::class, 'submitMultipleChoice'])->name('submit-quiz-multiple-choice');
 Route::post('/quiz/multiple-response/submit', [PagesController::class, 'submitMultipleResponse'])->name('submit-quiz-multiple-response');
+Route::post('/quiz/true-false/submit', [PagesController::class, 'submitTrueFalse'])->name('submit-quiz-true-false');
+
 
 
 

@@ -12,7 +12,7 @@
 
             {{-- Add Question Form Starts --}}
             <form id="add_question_form" v-on:submit="validateForm" method="POST"
-                action="{{ route('store-question-multiple-choice', ['quiz_id' => $quiz->id]) }}">
+                action="{{ route('store-question-true-false', ['quiz_id' => $quiz->id]) }}">
                 @csrf
                 <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
 
@@ -44,35 +44,25 @@
 
                     {{-- Answer Options --}}
                     <h4 class="mb-3">Answers Options:</h4>
+                    <div class="d-flex">
                     <table class="table table-bordered">
-                        <tr v-for="(answer,key) in answers" :key="key">
-                            <td style="width: 40px">
-                                <input type="checkbox" v-model="correctAnswers[key]" name="correct_answer" :value="key"
-                                    class="form-check-input">
-                            </td>
-                            <td>
-                                <div class="input-group input-group-navbar">
-                                    <input type="text" class="form-control" v-model="answer.content"
-                                        placeholder="Answer Option" name="answer[]">
-                                    <button v-show="key >= 2" class="btn text-danger" type="button"
-                                        v-on:click="removeAnswer(key)">
-                                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
-                                            stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                            </path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+                        
+                            <tr v-for="(answer,key) in answers" :key="key">
+                                <td style="width: 40px">
+                                    <input type="radio" v-model="correctAnswer" name="correct_answer" :value="key"
+                                        class="form-check-input" :id="key">
+                                </td>
+                                <td>
+                                    <label class="form-check-label" :for="key">
+                                        @{{ answer.content }}
+                                      </label>
+                                </td>
+                            </tr>
+                        
                     </table>
+                </div>
 
-                    {{-- Add Answer Button --}}
-                    <button class="btn btn-success mb-3" v-on:click.prevent="addAnswer()">
-                        Add an answer
-                    </button>
+                    
 
                     {{-- Front-end Validation Error Messages
                     --}}

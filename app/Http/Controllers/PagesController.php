@@ -46,6 +46,14 @@ class PagesController extends Controller
 
             return view('quiz.multipleResponse.take', ["quiz" => $quiz]);
         }
+        if ($quiz->quiztype->id == 3) {
+
+            if ($quiz->question->count() < 1) {
+                abort('404');
+            }
+
+            return view('quiz.trueFalse.take', ["quiz" => $quiz]);
+        }
 
         abort('404');
     }
@@ -158,6 +166,50 @@ class PagesController extends Controller
         return redirect()->route('showResult', ["result_id" => $result->id]);
     }
 
+    public function submitTrueFalse(Request $request)
+    {
+
+        $request->validated(); //Validate the request using Form Request
+        $quiz = Quiz::findOrFail($request->quiz_id); //Find the quiz the submission belongs to
+        $answers = []; //Set an empty array to store answers
+        $total_questions = $quiz->question->count(); // Count the number of questions
+        $correct_answers = 0; //Set an empty variable to calculate scores
+
+        //Store answers in $answers array
+        foreach ($quiz->question->all() as $key => $question) {
+
+            //Check whether provided answer is correct
+            if ($request->answer[$key] == $question->correct_answer) {
+                $is_correct = true;
+                $correct_answers++; //Increase correct_answers counter for every correct answer
+            } else {
+                $is_correct = false;
+            }
+
+            //Write to $answers array
+            array_push($answers, [
+                "question" => $question->title,
+                "all_answers" => json_decode($question->answers),
+                "given_answer" => $request->answer[$key],
+                "correct_answer" => $question->correct_answer,
+                "is_correct" => $is_correct
+            ]);
+        }
+
+        // Store the result to Database
+        $result = Result::create([
+            "quiz_id" => $quiz->id,
+            "email" => request('email'),
+            "name" => request('name'),
+            "answers" => json_encode($answers),
+            "total_questions" => $total_questions,
+            "correct_answers" => $correct_answers,
+            "score" => ($correct_answers / $total_questions) * 100
+        ]);
+
+        return redirect()->route('showResult', ["result_id" => $result->id]);
+    }
+
     public function showResult($result_id)
     {
 
@@ -170,6 +222,10 @@ class PagesController extends Controller
 
         if ($result->quiz->quiztype->id == 2) {
             return view('quiz.multipleResponse.result', ["result" => $result, "quiz" => $quiz]);
+        }
+
+        if ($result->quiz->quiztype->id == 3) {
+            return view('quiz.trueFalse.result', ["result" => $result, "quiz" => $quiz]);
         }
     }
 }

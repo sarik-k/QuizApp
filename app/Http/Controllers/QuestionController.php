@@ -95,6 +95,25 @@ class QuestionController extends Controller
         
     }
 
+    public function store_true_false(Request $request)
+    {
+        //
+        //$request->validated();
+
+        // ddd(request('question_title'));
+        
+        
+        $question = Question::create([
+            'title' => request('question_title'),
+            'correct_answer' => request('correct_answer'),
+            'answers' => json_encode([0,1]) ,
+            'quiz_id' => request('quiz_id')
+        ]);
+        
+        return redirect()->route('edit-quiz', ['quiz_id' => request('quiz_id')]);
+        
+    }
+
     /**
      * Display the specified resource.
      *
