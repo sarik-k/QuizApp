@@ -35,14 +35,14 @@
                                 <td>{{ $result->name }}</td>
                                 <td>{{ $result->score }}%</td>
                                 <td>
-                                    <a href="{{ route('show-multiple-choice-result', ['result_id' => $result->id]) }}" target="_blank">View Full Result</a>
+                                    <a href="{{ route('showResult', ['result_id' => $result->id]) }}" target="_blank">View Full Result</a>
                                 </td>
 
                             </tr>
 
                         @empty
                             <tr>
-                                <td colspan="5">No Results to Display</td>
+                                <td colspan="7">No Results to Display</td>
                             </tr>
 
                         @endforelse

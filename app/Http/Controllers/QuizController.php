@@ -30,10 +30,9 @@ class QuizController extends Controller
     public function index()
     {
         //        
-        
+
         $quizzes = Auth::user()->quiz()->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.quiz.index', ['quizzes' => $quizzes]);
-
     }
 
     /**
@@ -68,11 +67,10 @@ class QuizController extends Controller
             'user_id' => auth()->user()->id
         ]);
 
-        if (request('quiz_type') == 1) {
-            return redirect()->route('edit-quiz', ['quiz_id' => $newQuiz->id]);
-        } else {
-            die(404);
-        }
+        // if (request('quiz_type') == 1) {
+        return redirect()->route('edit-quiz', ['quiz_id' => $newQuiz->id]);
+        // }
+
     }
 
     /**
@@ -94,13 +92,33 @@ class QuizController extends Controller
      */
     public function edit($quiz_id)
     {
-        //
+        //Find Quiz by ID
         $quiz = Quiz::findOrFail($quiz_id);
+
+        //Verify if Quiz belongs to current user
         if (auth()->user()->id != $quiz->user_id) {
             abort('403');
         }
 
-        return view('admin.quiz.multipleChoice.edit', ['quiz' => $quiz]);
+        //Multiple Choice
+        if ($quiz->quiztype->id == 1) {
+            return view('admin.quiz.multipleChoice.edit', ['quiz' => $quiz]);
+        }
+
+        //Multiple Response
+        if ($quiz->quiztype->id == 2) {
+            return view('admin.quiz.multipleResponse.edit', ['quiz' => $quiz]);
+        }
+
+        //True False
+        if ($quiz->quiztype->id == 3) {
+            return view('admin.quiz.trueFalse.edit', ['quiz' => $quiz]);
+        }
+
+        //Short Text
+        if ($quiz->quiztype->id == 4) {
+            return view('admin.quiz.shortText.edit', ['quiz' => $quiz]);
+        }
     }
 
     /**

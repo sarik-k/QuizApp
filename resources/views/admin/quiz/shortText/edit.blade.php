@@ -1,6 +1,9 @@
 @extends('admin/layout')
 
 @section('content')
+<h1>
+    This section has not been made.
+</h1>
 
     <div id="root">
         <h1 class="h3 ">Quiz Editor </h1>
@@ -21,7 +24,7 @@
     
                     <div class="card-body">
     
-                        @include('admin.quiz.multipleChoice.addQuestion')
+                        @include('admin.quiz.shortText.addQuestion')
     
                         
                         
@@ -92,7 +95,7 @@
 
                 ],
 
-                correctAnswer: null,
+                correctAnswers: null,
                 errors: []
 
             },
@@ -105,12 +108,12 @@
                     this.answers.push(newAnswer); //Push to answers array
                 },
                 removeAnswer(key) {
-                    if (this.correctAnswer == key) { //Clear correctAnswer if Correct Answer Option is removed
-                        this.correctAnswer = null;
-                    } else if (this.correctAnswer >
+                    if (this.correctAnswers == key) { //Clear correctAnswers if Correct Answer Option is removed
+                        this.correctAnswers = null;
+                    } else if (this.correctAnswers >
                         key
                     ) { //If removed answer is above correct answer, reduce correct answer value by one to match key
-                        this.correctAnswer--;
+                        this.correctAnswers--;
                     }
 
                     this.answers.splice(key, 1);
@@ -159,7 +162,7 @@
                     }
 
                     //Check if user has selected a correct answer
-                    if (this.correctAnswer == null) {
+                    if (this.correctAnswers == null) {
                         this.errors.push("Please select a correct answer.");
                     }
 

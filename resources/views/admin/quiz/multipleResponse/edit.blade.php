@@ -21,7 +21,7 @@
     
                     <div class="card-body">
     
-                        @include('admin.quiz.multipleChoice.addQuestion')
+                        @include('admin.quiz.multipleResponse.addQuestion')
     
                         
                         
@@ -35,7 +35,7 @@
                                         @foreach (json_decode($question->answers) as $k => $answer)
                                             <div class="col-6">
 
-                                                @if ($question->correct_answer == $k)
+                                                @if (in_array($k, json_decode($question->correct_answer)))
 
                                                 <div class="mb-3 text-success h4">
                                                     <i class="far fa-fw fa-check-circle"></i> {{ $answer }}
@@ -92,37 +92,41 @@
 
                 ],
 
-                correctAnswer: null,
+                correctAnswers: [false,false,false,false],
                 errors: []
 
             },
 
             methods: {
                 addAnswer(key) {
-                    let newAnswer = {
-                        content: ''
-                    }; //Set new blank answer
-                    this.answers.push(newAnswer); //Push to answers array
+                    this.answers.push({content: ''}); //Push to answers array
+                    this.correctAnswers.push(false); //Push to correctAnswers array
                 },
                 removeAnswer(key) {
-                    if (this.correctAnswer == key) { //Clear correctAnswer if Correct Answer Option is removed
-                        this.correctAnswer = null;
-                    } else if (this.correctAnswer >
-                        key
-                    ) { //If removed answer is above correct answer, reduce correct answer value by one to match key
-                        this.correctAnswer--;
-                    }
-
+                    this.correctAnswers.splice(key, 1);
                     this.answers.splice(key, 1);
                 },
 
                 checkForEmptyAnswers(array) {
-                    // Function to check if content of array is empty
-                    const empty_answers = (element) => element.content === '';
+                    //Function to check if content of array is empty
+                    const empty_answers = (element) => element.content  === '';
 
                     if (array.some(empty_answers)) { //Check if there are any empty answers
                         return true;
                     };
+
+
+                },
+                checkIfCorrectAnswerIsSelected(array) {
+                    //Function to check if content of array is empty
+                    const true_answers = (element) => element == true;
+
+                    if (array.some(true_answers)) { //Check if there are any empty answers
+                        return true;
+                    };
+
+                    return false;
+
                 },
                 checkForDuplicateAnswers(array) {
 
@@ -159,9 +163,15 @@
                     }
 
                     //Check if user has selected a correct answer
-                    if (this.correctAnswer == null) {
-                        this.errors.push("Please select a correct answer.");
+                    if(!this.checkIfCorrectAnswerIsSelected(this.correctAnswers)){
+                        this.errors.push("Please select atleast one correct answer.");
                     }
+                
+                    
+                    //if (this.correctAnswers == null) {
+                    //    this.errors.push("Please select a correct answer.");
+                    //}
+
 
                     // Check if there are empty answers
                     if (this.checkForEmptyAnswers(this.answers)) {

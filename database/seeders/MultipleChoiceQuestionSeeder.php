@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
-class QuestionSeeder extends Seeder
+class MultipleChoiceQuestionSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -12,10 +12,12 @@
     <link href="/admin/css/app.css" rel="stylesheet">
 
     <!--Livewire Styles--->
-    @livewireStyles
+    {{-- @livewireStyles --}}
 
     <!--Vue JS V2 -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> --}}
+    <script src="/admin/js/vue.js"></script>
+
 
 </head>
 
@@ -191,10 +193,10 @@
 
     <!--Main App JS -->
     <script src="/admin/js/app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="/admin/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
     <!--Livewire Scripts -->
-    @livewireScripts
+    {{-- @livewireScripts --}}
 
     <!--Inline Scripts -->
     @yield('scripts')

@@ -30,7 +30,24 @@ class PagesController extends Controller
     {
 
         $quiz = Quiz::findOrFail($quiz_id);
-        return view('quiz.multipleChoice.take', ["quiz" => $quiz]);
+        if ($quiz->quiztype->id == 1) {
+
+            if ($quiz->question->count() < 1) {
+                abort('404');
+            }
+
+            return view('quiz.multipleChoice.take', ["quiz" => $quiz]);
+        }
+        if ($quiz->quiztype->id == 2) {
+
+            if ($quiz->question->count() < 1) {
+                abort('404');
+            }
+
+            return view('quiz.multipleResponse.take', ["quiz" => $quiz]);
+        }
+
+        abort('404');
     }
 
     public function submitMultipleChoice(SubmitMultipleChoiceQuestionRequest $request)
@@ -63,6 +80,7 @@ class PagesController extends Controller
             ]);
         }
 
+        // Store the result to Database
         $result = Result::create([
             "quiz_id" => $quiz->id,
             "email" => request('email'),
@@ -70,17 +88,88 @@ class PagesController extends Controller
             "answers" => json_encode($answers),
             "total_questions" => $total_questions,
             "correct_answers" => $correct_answers,
-            "score" => ($correct_answers/$total_questions)*100
+            "score" => ($correct_answers / $total_questions) * 100
         ]);
 
-        return redirect()->route('show-multiple-choice-result',["result_id" => $result->id]);
-        //return view('quiz.multipleChoice.result', ["result" => $result]);
+        return redirect()->route('showResult', ["result_id" => $result->id]);
     }
 
-    public function showMultipleChoiceResult($result_id){
+    public function submitMultipleResponse(Request $request)
+    {
+        //ddd(array_values($request->answer[3]));
+
+        //$request->validated(); //Validate the request using Form Request
+        $quiz = Quiz::findOrFail($request->quiz_id); //Find the quiz the submission belongs to
+        $answers = []; //Set an empty array to store answers
+        $total_questions = $quiz->question->count(); // Count the number of questions
+        $total_correct_answers_given = 0; //Set an empty variable to calculate total correct answers given by participant
+        //$total_answers = 0; //Set an empty variable to calculate total answers of all questions combined
+        $total_correct_answer_options = 0; //Set an empty variable to calculate total correct answers of all questions combined
+         
+        $total_wrong_answers_given=0; //Set an empty variable to calculate total wrong answers given by participant
+
+        //Store answers in $answers array
+        foreach ($quiz->question->all() as $key => $question) {
+
+            $no_of_correct_answers_given = 0; //Set an empty variable to calculate no of correct answers given for this question
+            $no_of_wrong_answers_given=0; //Set an empty variable to calculate no of wrong answers given for this question
+
+            foreach ($request->answer[$key] as $index => $given_answer) {
+
+                if (in_array($given_answer, json_decode($question->correct_answer))) {
+                    $no_of_correct_answers_given++;
+                    $total_correct_answers_given++; //Increase correct_answers counter for every correct answer
+                } else {
+                    $no_of_wrong_answers_given++;
+                    $total_wrong_answers_given++;
+                }
+            }
+
+            //$total_answers = $total_answers + count(json_decode($question->answers));
+            $total_correct_answer_options = $total_correct_answer_options + count(json_decode($question->correct_answer));
+
+
+            //Write to $answers array
+            array_push($answers, [
+                "question" => $question->title,
+                "all_answers" => json_decode($question->answers),
+                "given_answers" => array_values($request->answer[$key]),
+                "correct_answers" => json_decode($question->correct_answer),
+                "no_of_correct_answers_given" => $no_of_correct_answers_given,
+                "no_of_wrong_answers_given" => $no_of_wrong_answers_given
+            ]);
+        }
+
+
+        $score = ($total_correct_answers_given - $total_wrong_answers_given) / $total_correct_answer_options * 100;
+        
+
+        // Store the result to Database
+        $result = Result::create([
+            "quiz_id" => $quiz->id,
+            "email" => request('email'),
+            "name" => request('name'),
+            "answers" => json_encode($answers),
+            "total_questions" => $total_questions,
+            "correct_answers" => $total_correct_answers_given,
+            "score" => $score
+        ]);
+
+        return redirect()->route('showResult', ["result_id" => $result->id]);
+    }
+
+    public function showResult($result_id)
+    {
 
         $result = Result::findOrFail($result_id);
+        $quiz = $result->quiz;
 
-        return view('quiz.multipleChoice.result', ["result" => $result]);
+        if ($result->quiz->quiztype->id == 1) {
+            return view('quiz.multipleChoice.result', ["result" => $result, "quiz" => $quiz]);
+        }
+
+        if ($result->quiz->quiztype->id == 2) {
+            return view('quiz.multipleResponse.result', ["result" => $result, "quiz" => $quiz]);
+        }
     }
 }

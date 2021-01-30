@@ -39,21 +39,29 @@
             <div class="row">
 
                 @forelse ($quizzes as $quiz)
-                    <a href="{{ route('take-quiz',['quiz_id' => $quiz->id]) }}">
+
+                    @if ($quiz->question->count() > 0)
+
                         <div class="col-xl-4 col-lg-4 col-md-6">
+
                             <div class="single-skill wow fadeInUp" data-wow-delay=".2s">
-                                <div class="skill-content">
-                                    <h4>{{ $quiz->name }}</h4>
-                                    <p>{{ $quiz->description }}</p>
-                                    <p class="text-warning mt-3">
-                                        <strong>{{ $quiz->quiztype->name }}: </strong>
-                                        <br>
-                                        {{ $quiz->quiztype->description }}
-                                    </p>
-                                </div>
+                                <a href="{{ route('take-quiz', ['quiz_id' => $quiz->id]) }}">
+                                    <div class="skill-content">
+                                        <h4>{{ $quiz->name }}</h4>
+                                        <p>{{ $quiz->description }}</p>
+                                        <p class="text-warning mt-3">
+                                            <strong>{{ $quiz->quiztype->name }}: </strong>
+                                            <br>
+                                            {{ $quiz->quiztype->description }}
+                                        </p>
+                                    </div>
+                                </a>
                             </div>
+
                         </div>
-                    </a>
+
+                    @endif
+
                 @empty
                     <h3>No Quizzes published yet</h3>
                 @endforelse

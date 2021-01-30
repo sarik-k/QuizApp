@@ -225,7 +225,7 @@
                             "Please fill all the answer inputs. Delete empty answers if possible.");
                     }
 
-                    // Check if there are duplucate answers
+                    // Check if there are duplicate answers
                     if (this.checkForDuplicateAnswers(this.answers)) {
                         this.errors.push(
                             "You cannot have duplicate answers!");

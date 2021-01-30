@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ route('submit-quiz-multiple-choice') }}"">
+        <form method="POST" action="{{ route('submit-quiz-multiple-response') }}"">
                 @csrf
                 <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
             <!--Email Address Input Card -->
@@ -67,8 +67,8 @@
                         @foreach (json_decode($question->answers) as $a_key => $answer)
 
                             <div class="form-check mb-3">
-                                <input class="form-check-input" type="radio" name="answer[{{ $q_key }}]"
-                                    id="answer_{{ $q_key }}_{{ $a_key }}" value="{{ $a_key }}" required>
+                                <input class="form-check-input" type="checkbox" name="answer[{{ $q_key }}][{{ $a_key }}]"
+                                    id="answer_{{ $q_key }}_{{ $a_key }}" value="{{ $a_key }}" >
                                 <label class="form-check-label" for="answer_{{ $q_key }}_{{ $a_key }}">
                                     {{ $answer }}
                                 </label>

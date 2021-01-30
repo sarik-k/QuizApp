@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RolesAndPermissionsSeeder::class,
             QuizSeeder::class,
-            QuestionSeeder::class,
+            MultipleChoiceQuestionSeeder::class,
+            MultipleResponseQuestionSeeder::class,
         ]);
     }
 }

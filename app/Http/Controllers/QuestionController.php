@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMultipleChoiceQuestionRequest;
+use App\Http\Requests\StoreMultipleResponseQuestionRequest;
 use App\Models\Question;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
@@ -69,6 +70,23 @@ class QuestionController extends Controller
         Question::create([
             'title' => request('question_title'),
             'correct_answer' => request('correct_answer'),
+            'answers' => json_encode(request('answer')) ,
+            'quiz_id' => request('quiz_id')
+        ]);
+        
+        return redirect()->route('edit-quiz', ['quiz_id' => request('quiz_id')]);
+        
+    }
+
+    public function store_multiple_response(StoreMultipleResponseQuestionRequest $request)
+    {
+        //
+        $request->validated();
+        
+        
+        Question::create([
+            'title' => request('question_title'),
+            'correct_answer' => json_encode(request('correct_answers')),
             'answers' => json_encode(request('answer')) ,
             'quiz_id' => request('quiz_id')
         ]);

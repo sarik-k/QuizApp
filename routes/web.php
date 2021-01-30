@@ -17,9 +17,10 @@ use App\Http\Controllers\PagesController;
 
 Route::get('/', [PagesController::class, 'home'])->name('homepage');
 Route::get('/quiz/{quiz_id}', [PagesController::class, 'takeQuiz'])->name('take-quiz');
-Route::get('/result/{result_id}', [PagesController::class, 'showMultipleChoiceResult'])->name('show-multiple-choice-result');
+Route::get('/result/{result_id}', [PagesController::class, 'showResult'])->name('showResult');
 
 Route::post('/quiz/multiple-choice/submit', [PagesController::class, 'submitMultipleChoice'])->name('submit-quiz-multiple-choice');
+Route::post('/quiz/multiple-response/submit', [PagesController::class, 'submitMultipleResponse'])->name('submit-quiz-multiple-response');
 
 
 
