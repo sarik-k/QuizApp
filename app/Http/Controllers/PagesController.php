@@ -169,7 +169,7 @@ class PagesController extends Controller
     public function submitTrueFalse(Request $request)
     {
 
-        $request->validated(); //Validate the request using Form Request
+        //$request->validated(); //Validate the request using Form Request
         $quiz = Quiz::findOrFail($request->quiz_id); //Find the quiz the submission belongs to
         $answers = []; //Set an empty array to store answers
         $total_questions = $quiz->question->count(); // Count the number of questions
