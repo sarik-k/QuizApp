@@ -114,6 +114,27 @@ class QuestionController extends Controller
         
     }
 
+    public function store_short_text(Request $request)
+    {
+        //
+        //$request->validated();
+
+        //ddd($request->request);
+
+        
+
+        
+        Question::create([
+            'title' => request('question_title'),
+            'correct_answer' => json_encode(simplifyArray(request('answer'))),
+            'answers' => json_encode(request('answer')) ,
+            'quiz_id' => request('quiz_id')
+        ]);
+        
+        return redirect()->route('edit-quiz', ['quiz_id' => request('quiz_id')]);
+        
+    }
+
     /**
      * Display the specified resource.
      *

@@ -12,7 +12,7 @@
 
             {{-- Add Question Form Starts --}}
             <form id="add_question_form" v-on:submit="validateForm" method="POST"
-                action="{{ route('store-question-multiple-choice', ['quiz_id' => $quiz->id]) }}">
+                action="{{ route('store-question-short-text', ['quiz_id' => $quiz->id]) }}">
                 @csrf
                 <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
 
@@ -46,15 +46,11 @@
                     <h4 class="mb-3">Answers Options:</h4>
                     <table class="table table-bordered">
                         <tr v-for="(answer,key) in answers" :key="key">
-                            <td style="width: 40px">
-                                <input type="checkbox" v-model="correctAnswers[key]" name="correct_answer" :value="key"
-                                    class="form-check-input">
-                            </td>
                             <td>
                                 <div class="input-group input-group-navbar">
                                     <input type="text" class="form-control" v-model="answer.content"
-                                        placeholder="Answer Option" name="answer[]">
-                                    <button v-show="key >= 2" class="btn text-danger" type="button"
+                                        placeholder="Add an answer" name="answer[]">
+                                    <button v-show="key >= 1" class="btn text-danger" type="button"
                                         v-on:click="removeAnswer(key)">
                                         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
                                             stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">

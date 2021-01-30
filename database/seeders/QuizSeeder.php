@@ -34,5 +34,11 @@ class QuizSeeder extends Seeder
             'user_id' => 2,
             'quiztype_id' => 3
         ]);
+        DB::table('quizzes')->insert([
+            'name' => 'General Knowledge',
+            'description' => 'A basic text quiz to check your general knowledge.',
+            'user_id' => 2,
+            'quiztype_id' => 4
+        ]);
     }
 }

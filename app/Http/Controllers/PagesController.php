@@ -55,6 +55,15 @@ class PagesController extends Controller
             return view('quiz.trueFalse.take', ["quiz" => $quiz]);
         }
 
+        if ($quiz->quiztype->id == 4) {
+
+            if ($quiz->question->count() < 1) {
+                abort('404');
+            }
+
+            return view('quiz.shortText.take', ["quiz" => $quiz]);
+        }
+
         abort('404');
     }
 
@@ -113,14 +122,14 @@ class PagesController extends Controller
         $total_correct_answers_given = 0; //Set an empty variable to calculate total correct answers given by participant
         //$total_answers = 0; //Set an empty variable to calculate total answers of all questions combined
         $total_correct_answer_options = 0; //Set an empty variable to calculate total correct answers of all questions combined
-         
-        $total_wrong_answers_given=0; //Set an empty variable to calculate total wrong answers given by participant
+
+        $total_wrong_answers_given = 0; //Set an empty variable to calculate total wrong answers given by participant
 
         //Store answers in $answers array
         foreach ($quiz->question->all() as $key => $question) {
 
             $no_of_correct_answers_given = 0; //Set an empty variable to calculate no of correct answers given for this question
-            $no_of_wrong_answers_given=0; //Set an empty variable to calculate no of wrong answers given for this question
+            $no_of_wrong_answers_given = 0; //Set an empty variable to calculate no of wrong answers given for this question
 
             foreach ($request->answer[$key] as $index => $given_answer) {
 
@@ -150,7 +159,7 @@ class PagesController extends Controller
 
 
         $score = ($total_correct_answers_given - $total_wrong_answers_given) / $total_correct_answer_options * 100;
-        
+
 
         // Store the result to Database
         $result = Result::create([
@@ -210,6 +219,58 @@ class PagesController extends Controller
         return redirect()->route('showResult', ["result_id" => $result->id]);
     }
 
+    public function submitShortText(Request $request)
+    {
+
+        //$request->validated(); //Validate the request using Form Request
+
+        //ddd($request->request);
+
+        $quiz = Quiz::findOrFail($request->quiz_id); //Find the quiz the submission belongs to
+        $answers = []; //Set an empty array to store answers
+        $total_questions = $quiz->question->count(); // Count the number of questions
+        $correct_answers = 0; //Set an empty variable to calculate scores
+
+        //Store answers in $answers array
+        foreach ($quiz->question->all() as $key => $question) {
+
+            // ddd($request->answer[$key]);
+
+            $is_correct = false;
+
+            //foreach ($request->answer[$key] as $index => $given_answer) {
+            if (in_array(simplifyAnswer($request->answer[$key]), json_decode($question->correct_answer))) {
+                $correct_answers++;
+                $is_correct = true;
+            }
+            //}
+
+
+
+            //Write to $answers array
+            array_push($answers, [
+                "question" => $question->title,
+                "all_answers" => json_decode($question->answers),
+                "given_answer" => $request->answer[$key],
+                "correct_answers" => json_decode($question->correct_answer),
+                "is_correct" => $is_correct
+            ]);
+        }
+
+        // Store the result to Database
+        $result = Result::create([
+            "quiz_id" => $quiz->id,
+            "email" => request('email'),
+            "name" => request('name'),
+            "answers" => json_encode($answers),
+            "total_questions" => $total_questions,
+            "correct_answers" => $correct_answers,
+            "score" => ($correct_answers / $total_questions) * 100
+        ]);
+
+        return redirect()->route('showResult', ["result_id" => $result->id]);
+    }
+
     public function showResult($result_id)
     {
 
@@ -226,6 +287,10 @@ class PagesController extends Controller
 
         if ($result->quiz->quiztype->id == 3) {
             return view('quiz.trueFalse.result', ["result" => $result, "quiz" => $quiz]);
+        }
+
+        if ($result->quiz->quiztype->id == 4) {
+            return view('quiz.shortText.result', ["result" => $result, "quiz" => $quiz]);
         }
     }
 }

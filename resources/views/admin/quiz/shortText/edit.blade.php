@@ -1,10 +1,6 @@
 @extends('admin/layout')
 
 @section('content')
-<h1>
-    This section has not been made.
-</h1>
-
     <div id="root">
         <h1 class="h3 ">Quiz Editor </h1>
         <p class="h5 mb-3">{{ $quiz->quiztype->name }} - <small class="text-muted">{{ $quiz->quiztype->description }}</small></p>
@@ -24,7 +20,7 @@
     
                     <div class="card-body">
     
-                        @include('admin.quiz.shortText.addQuestion')
+                         @include('admin.quiz.shortText.addQuestion') 
     
                         
                         
@@ -37,22 +33,9 @@
                                     <div class="row">
                                         @foreach (json_decode($question->answers) as $k => $answer)
                                             <div class="col-6">
-
-                                                @if ($question->correct_answer == $k)
-
                                                 <div class="mb-3 text-success h4">
                                                     <i class="far fa-fw fa-check-circle"></i> {{ $answer }}
-                                                </div>
-                                                    
-                                                @else
-
-                                                <div class="mb-3 text-danger h4">
-                                                    <i class="far fa-fw fa-times-circle"></i> {{ $answer }}
-                                                </div>
-                                                    
-                                                @endif
-
-                                                
+                                                </div>   
                                             </div>
                                         @endforeach
                                         
@@ -62,7 +45,7 @@
                             </div>
                         @empty
                             Start by adding a Question!
-                        @endforelse
+                        @endforelse 
 
 
                     </div>
@@ -83,19 +66,8 @@
                 answers: [{
                         content: ''
                     },
-                    {
-                        content: ''
-                    },
-                    {
-                        content: ''
-                    },
-                    {
-                        content: ''
-                    }
 
                 ],
-
-                correctAnswers: null,
                 errors: []
 
             },
@@ -108,13 +80,6 @@
                     this.answers.push(newAnswer); //Push to answers array
                 },
                 removeAnswer(key) {
-                    if (this.correctAnswers == key) { //Clear correctAnswers if Correct Answer Option is removed
-                        this.correctAnswers = null;
-                    } else if (this.correctAnswers >
-                        key
-                    ) { //If removed answer is above correct answer, reduce correct answer value by one to match key
-                        this.correctAnswers--;
-                    }
 
                     this.answers.splice(key, 1);
                 },
@@ -139,10 +104,8 @@
 
                     //Simplify the array
                     array.forEach(answer => {
-                        stripped_answers_array.push(answer.content);
+                        stripped_answers_array.push(answer.content.toLowerCase());
                     });
-
-
 
                     //Check if there are duplicates
                     if (hasDuplicates(stripped_answers_array)) {
@@ -151,7 +114,25 @@
 
 
                 },
+
+                checkIfAnswersLengthExceedsMaxLength(array,length) {
+
+                    var too_long = false;
+
+                    array.forEach(element => {
+                       if(element.content.length > length){
+                           too_long = true
+                       }
+                    });
+
+                    if(too_long){
+                        return true;
+                    }
+                },
                 validateForm: function(e) {
+
+                    
+
 
                     //Set error array to empty
                     this.errors = [];
@@ -159,11 +140,6 @@
                     //Check if user has entered a question
                     if (!this.question) {
                         this.errors.push("A Question is required.");
-                    }
-
-                    //Check if user has selected a correct answer
-                    if (this.correctAnswers == null) {
-                        this.errors.push("Please select a correct answer.");
                     }
 
                     // Check if there are empty answers
@@ -177,6 +153,13 @@
                         this.errors.push(
                             "You cannot have duplicate answers!");
                     }
+
+                    // Check if answer exceeds max length
+
+                    if (this.checkIfAnswersLengthExceedsMaxLength(this.answers,25)){
+                        this.errors.push(
+                            "Answers cannot exceed 25 characters");
+                    };
 
                     //Submit form if there are no errors
                     if (!this.errors.length) {

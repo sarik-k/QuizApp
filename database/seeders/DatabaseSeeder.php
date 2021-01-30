@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             MultipleChoiceQuestionSeeder::class,
             MultipleResponseQuestionSeeder::class,
             trueFalseQuestionSeeder::class,
+            ShortTextQuizSeeder::class,
         ]);
     }
 }
