@@ -3,6 +3,7 @@
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin/dashboard');
     })->name('dashboard');
+
+    Route::get('/dashboard/profile',[UserController::class,'profile'])->name('user-profile');
 
     Route::get('/dashboard/quiz/', [QuizController::class, 'index'])->name('list-quiz');
 

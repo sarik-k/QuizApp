@@ -130,7 +130,7 @@
                                     {{-- <i class="align-middle mr-1"
                                         data-feather="user"></i> --}}
                                     Frontend</a>
-                                <a class="dropdown-item" href="pages-profile.html">
+                                <a class="dropdown-item" href="{{ route('user-profile') }}">
                                     {{-- <i class="align-middle mr-1"
                                         data-feather="user"></i> --}}
                                     Profile</a>

@@ -2,22 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Result;
-use App\Models\User;
-use App\Models\Quiz;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-
-class ResultController extends Controller
+class UserController extends Controller
 {
-    protected $result;
-
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => ['index', 'show']]); //Make all functions pass through auth middleware, except those mentioned
-        $this->result = new Result;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -26,17 +14,6 @@ class ResultController extends Controller
     public function index()
     {
         //
-
-                
-        
-        
-        if (Auth::user()->hasPermissionTo('do anything')) {
-            $results = Result::orderBy('created_at', 'desc')->paginate(10);
-        } else {
-            $results = Auth::user()->result()->orderBy('created_at', 'desc')->paginate(10);
-        }
-
-        return view('admin.result.index', ['results' => $results]);
     }
 
     /**
@@ -63,21 +40,22 @@ class ResultController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Result  $result
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Result $result)
+    public function show($id)
     {
         //
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Result  $result
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Result $result)
+    public function edit($id)
     {
         //
     }
@@ -86,10 +64,10 @@ class ResultController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Result  $result
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Result $result)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -97,11 +75,17 @@ class ResultController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Result  $result
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Result $result)
+    public function destroy($id)
     {
         //
+    }
+
+    public function profile()
+    {
+        //
+        return view('admin.user.profile');
     }
 }

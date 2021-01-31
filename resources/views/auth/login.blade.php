@@ -57,6 +57,24 @@
                                     <div class="text-center mt-3">
                                         <button type="submit" class="btn btn-lg btn-primary">Sign in</button>
                                     </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <strong>
+                                                Demo Super Admin credentials:
+                                            </strong><br>
+                                            Email: superadmin@superadmin.com <br>
+                                            Password: password
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <strong>Demo Admin credentials:</strong>
+                                            <br>
+                                            Email: admin@admin.com <br>
+                                            Password: password
+                                        </div>
+                                    </div>
+                                    
+
                                 </form>
                             </div>
                         </div>

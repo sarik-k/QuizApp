@@ -32,13 +32,13 @@ class QuizController extends Controller
         //        
 
 
+
+
         if (Auth::user()->hasPermissionTo('do anything')) {
             $quizzes = Quiz::orderBy('id', 'desc')->paginate(10);
         } else {
             $quizzes = Auth::user()->quiz()->orderBy('created_at', 'desc')->paginate(10);
         }
-        
-
 
         
         return view('admin.quiz.index', ['quizzes' => $quizzes]);
@@ -105,9 +105,9 @@ class QuizController extends Controller
         $quiz = Quiz::findOrFail($quiz_id);
 
         //Verify if Quiz belongs to current user
-        // if (auth()->user()->id != $quiz->user_id) {
-        //     abort('403');
-        // }
+        if(!auth()->user()->can('update',$quiz)){
+            abort('403');
+        }
 
         //Multiple Choice
         if ($quiz->quiztype->id == 1) {
