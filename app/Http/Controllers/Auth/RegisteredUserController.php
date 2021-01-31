@@ -9,6 +9,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Rules\NotAllowedDomain;
+
 
 class RegisteredUserController extends Controller
 {
@@ -36,6 +38,10 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
+        ]);
+
+        $request->validate([
+            'email' => new NotAllowedDomain
         ]);
 
         Auth::login($user = User::create([

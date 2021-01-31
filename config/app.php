@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia delectus provident possimus quos blanditiis officiis adipisci porro vitae, eaque quis fugiat corporis illum consequuntur iusto mollitia. Dolores ratione officia soluta.',
+    'description' => 'Create a Quiz in minutes and share to the World!',
 
     /*
     |--------------------------------------------------------------------------

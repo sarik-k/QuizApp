@@ -44,7 +44,7 @@
 
                         @empty
                             <tr>
-                                <td colspan="5">No Quizzes to Display</td>
+                                <td colspan="100%">No Quizzes to Display</td>
                             </tr>
 
                         @endforelse

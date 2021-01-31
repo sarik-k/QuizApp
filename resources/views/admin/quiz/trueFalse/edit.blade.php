@@ -4,10 +4,11 @@
 
     <div id="root">
         <h1 class="h3 ">Quiz Editor </h1>
-        <p class="h5 mb-3">{{ $quiz->quiztype->name }} - <small
-                class="text-muted">{{ $quiz->quiztype->description }}</small></p>
 
         <div class="row">
+            <div class="col-md-4">
+                @include('admin.quiz.sidebar')
+            </div>
             <div class="col-8">
                 <div class="card">
                     <div class="card-header">
@@ -87,7 +88,9 @@
             ],
 
             correctAnswer: null,
-            errors: []
+            errors: [],
+            shareLink: '{{ config('app.url') }}/quiz/{{ $quiz->id }}',
+            copyMessage: 'copy'
 
         },
 
@@ -115,6 +118,17 @@
 
                 //Prevent form submission if there are errors
                 e.preventDefault();
+            },
+            copyLink() {
+                let linkToCopy = document.querySelector('#shareLink');
+                linkToCopy.select();
+                try {
+                    var successful = document.execCommand('copy');
+                    this.copyMessage = 'copied!';
+                    setTimeout(() => {  this.copyMessage = 'copy'; }, 1000);
+                } catch (err) {
+                    alert('Oops, unable to copy');
+                }
             }
         }
     })

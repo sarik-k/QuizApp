@@ -22,9 +22,11 @@
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
 
-                                        @foreach ($errors->all() as $error)
-                                            {{ $error }} <br>
-                                        @endforeach
+                                        <div class="alert-message">
+                                            @foreach ($errors->all() as $error)
+                                                {{ $error }} <br>
+                                            @endforeach
+                                        </div>
                                     </div>
 
                                 @endif
@@ -39,6 +41,7 @@
                                         <label class="form-label">Email</label>
                                         <input class="form-control form-control-lg" type="email" name="email"
                                             placeholder="Enter your email" id="email" required />
+                                        <small>Registering from these public domains are prohibited:<br> gmail.com, yahoo.com, hotmail.com, outlook.com, live.com and aol.com</small>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Password</label>

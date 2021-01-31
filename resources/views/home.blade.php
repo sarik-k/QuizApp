@@ -11,7 +11,8 @@
                         <p class="wow fadeInUp" data-wow-delay=".4s">{{ config('app.description', 'No App Description') }}
                         </p>
                         <div class="hero-btns">
-                            <a href="#quizzes" class="main-btn wow fadeInUp" data-wow-delay=".6s">Take a Quiz</a>
+                            <a href="#quizzes" class="main-btn wow fadeInUp" data-wow-delay=".6s">Create a Quiz</a>
+                            <a href="#quizzes" class="btn btn-secondary rounded-pill p-3 wow fadeInUp ml-3" data-wow-delay=".6s">Take a Quiz</a>
                         </div>
                     </div>
                 </div>

@@ -42,7 +42,7 @@
 
                         @empty
                             <tr>
-                                <td colspan="7">No Results to Display</td>
+                                <td colspan="100%">No Results to Display</td>
                             </tr>
 
                         @endforelse

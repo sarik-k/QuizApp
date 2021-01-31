@@ -28,10 +28,10 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="page-scroll" href="#blog">Blog</a>
-                                </li>
+                                </li>--}}
                                 <li class="nav-item">
-                                    <a class="page-scroll" href="#contact">Contact</a>
-                                </li> --}}
+                                    <a class="page-scroll" href="#quizzes">Quizzes</a>
+                                </li> 
                                 @if (Route::has('login'))
 
                                     @auth
