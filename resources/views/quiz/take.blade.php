@@ -5,7 +5,7 @@
 
     <main class="mt-5 mx-auto p-3 w-40">
         <div class="card rounded-6 mb-3">
-            <img src="{{ asset('storage/images/take.jpg') }}" class="card-img-top rounded-6" alt="Take Banner">
+            <img src="https://i.imgur.com/kJpy4le.jpg" class="card-img-top rounded-6" alt="Take Banner">
         </div>
         <div class="text-right">
             <a href="/#quizzes" class="btn btn-primary">Back to Quiz List</a>

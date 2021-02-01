@@ -4,7 +4,7 @@
 
     <main class="mt-5 mx-auto p-3 w-40">
         <div class="card rounded-6 mb-3">
-            <img src="{{ asset('storage/images/result.jpg') }}" class="card-img-top rounded-6" alt="Result Banner">
+            <img src="https://i.imgur.com/BzCOxlC.jpg" class="card-img-top rounded-6" alt="Result Banner">
         </div>
         <div class="card title-card rounded-6 mb-3">
             <div class="card-body">
