@@ -15,7 +15,6 @@ class ResultController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]); //Make all functions pass through auth middleware, except those mentioned
         $this->result = new Result;
     }
     /**
