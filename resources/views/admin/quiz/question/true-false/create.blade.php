@@ -55,8 +55,8 @@
                                     
                                 </table> 
 
-                                    <button class="btn btn-success mb-3" v-on:click.prevent="addAnswer()">Add an
-                                        answer</button>
+                                    {{-- <button class="btn btn-success mb-3" v-on:click.prevent="addAnswer()">Add an
+                                        answer</button> --}}
 
                                     @error('answer.*')
                                         <div class="alert alert-danger mb-3">

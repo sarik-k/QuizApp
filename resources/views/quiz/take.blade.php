@@ -22,6 +22,19 @@
             </div>
         </div>
 
+        @error('answer')
+        <div class=" card rounded-6 mb-3 p-3">
+            <div class="card-body">
+                    <div class="alert alert-danger">
+                        <div class="alert-message">
+                            Please answer all questions and try again. 
+                        </div>
+                    </div>
+            </div>
+        </div>
+        @enderror
+
+
         <form method="POST" action="{{ route('store-result') }}"">
                                     @csrf
                                     <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">

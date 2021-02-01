@@ -35,7 +35,7 @@
                                 <td>{{ $result->name }}</td>
                                 <td>{{ $result->score }}%</td>
                                 <td>
-                                    <a href="{{ route('showResult', ['result_id' => $result->id]) }}" target="_blank">View Full Result</a>
+                                    <a href="{{ route('show-result', ['result_id' => $result->id]) }}" target="_blank">View Full Result</a>
                                 </td>
 
                             </tr>

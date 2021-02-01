@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-10">
         <strong>Question {{ $key + 1 }}:</strong> {{ $question->title }}
-        <p>
+        <p class="fst-italic">
             <strong>{{ $question->questiontype->name }}</strong> -
-            <span class="text-muted">{{ $question->questiontype->description }}</span>
+            <span class="text-muted fst-italic">{{ $question->questiontype->description }}</span>
         </p>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-2">
 
         <div class="table-action d-inline text-right">
             <form method="POST" action="{{ route('destroy-question', ['question_id' => $question->id]) }}"

@@ -55,7 +55,7 @@ class ResultController extends Controller
     public function store(Request $request)
     {
         //
-        // $request->validated();
+        
 
         $quiz = Quiz::findOrFail($request->quiz_id); //Find the quiz the submission belongs to
         $answers = []; //Set an empty array to store answers
@@ -66,6 +66,11 @@ class ResultController extends Controller
         $total_correct_answers_given = 0; //Set an empty variable to calculate total correct answers given by participant
         $total_wrong_answers_given = 0; //Set an empty variable to calculate total wrong answers given by participant
         $total_score = 0; //Set an empty variable to calculate total score of participant
+
+        
+        $request->validate([
+            'answer' => 'min:'.$total_questions
+        ]);
 
         //Store answers in $answers array
 

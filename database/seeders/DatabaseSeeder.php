@@ -15,15 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            QuiztypeSeeder::class,
             UserSeeder::class,
             RolesAndPermissionsSeeder::class,
             QuizSeeder::class,
-            MultipleChoiceQuestionSeeder::class,
-            MultipleResponseQuestionSeeder::class,
-            trueFalseQuestionSeeder::class,
-            ShortTextQuizSeeder::class,
-            QuestionTypesSeeder::class
+            QuestionSeeder::class,
+            QuestionTypesSeeder::class,
+            ResultSeeder::class
         ]);
     }
 }

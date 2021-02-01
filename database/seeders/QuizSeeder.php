@@ -18,27 +18,9 @@ class QuizSeeder extends Seeder
         //
         DB::table('quizzes')->insert([
             'name' => 'Do you know Laravel?',
-            'description' => 'A simple quiz to test your Laravel skills.',
+            'description' => 'A Demo Quiz that contains questions related to Laravel.',
             'user_id' => 2,
-            // 'quiztype_id' => 1
         ]);
-        DB::table('quizzes')->insert([
-            'name' => 'Basic Questions',
-            'description' => 'A basic quiz to check your basic skills.',
-            'user_id' => 2,
-            // 'quiztype_id' => 2
-        ]);
-        DB::table('quizzes')->insert([
-            'name' => 'Tech Questions',
-            'description' => 'A basic quiz to check your tech knowledge.',
-            'user_id' => 2,
-            // 'quiztype_id' => 3
-        ]);
-        DB::table('quizzes')->insert([
-            'name' => 'General Knowledge',
-            'description' => 'A basic text quiz to check your general knowledge.',
-            'user_id' => 2,
-            // 'quiztype_id' => 4
-        ]);
+        
     }
 }
