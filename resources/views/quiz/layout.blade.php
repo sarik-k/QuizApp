@@ -8,16 +8,14 @@
     <title>{{ config('app.name', 'Laravel') }} - {{ $quiz->name }}</title>
 
     <!--Bootstrap 5 CSS-->
-    {{--
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    --}}
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> --}}
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
     <link rel="stylesheet"
         href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
         integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!--Custon Quiz Styles--->
     <style>
@@ -41,6 +39,19 @@
             max-width: 40rem !important;
         }
 
+        .custom-file-control:disabled,
+        .form-control:disabled,
+        .form-control[readonly],
+        [readonly].custom-file-control {
+            background-color: #ffffff;
+            opacity: 1;
+        }
+
+        [class*=" bmd-label"],
+        [class^=bmd-label] {
+            color: rgb(0 0 0);
+        }
+
     </style>
 
 </head>
@@ -49,7 +60,7 @@
 
     @yield('content')
 
- <!--Bootstrap 5 JS-->
+    <!--Bootstrap 5 JS-->
     {{-- <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">

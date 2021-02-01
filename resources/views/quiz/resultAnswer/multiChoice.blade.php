@@ -11,4 +11,7 @@
     </div>
 @endforeach
 <hr>
-<strong>Correct Answer:</strong> {{ $answer->all_answers[$answer->correct_answer] }}
+<strong>Score:</strong> {{ $answer->score }} <br>
+<strong>Correct Answer:</strong> <h5 class="d-inline">
+    <span class="badge badge-light ">{{ $answer->all_answers[$answer->correct_answer] }}</span>
+</h5>

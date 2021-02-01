@@ -14,11 +14,11 @@
 
 
 <hr>
+<strong>Score:</strong> {{ $answer->score }} <br>
 <strong>Correct Answers:</strong>
 
 @foreach ($answer->correct_answers as $correct_answer)
     <h5 class="d-inline">
         <span class="badge badge-light ">{{ $correct_answer }}</span>
     </h5>
-    {{-- {{ $loop->last ? '' : ', ' }} --}}
 @endforeach

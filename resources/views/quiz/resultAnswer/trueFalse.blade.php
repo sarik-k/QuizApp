@@ -18,4 +18,7 @@
                         </div>
                     @endforeach
                     <hr>
-                    <strong>Correct Answer:</strong> {{  (boolval($answer->all_answers[ $answer->correct_answer ]) ? 'True' : 'False') }}
+                    <strong>Score:</strong> {{ $answer->score }} <br>
+                    <strong>Correct Answer:</strong> <h5 class="d-inline">
+                        <span class="badge badge-light ">{{  (boolval($answer->all_answers[ $answer->correct_answer ]) ? 'True' : 'False') }}</span>
+                    </h5>

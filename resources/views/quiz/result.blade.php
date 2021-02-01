@@ -3,22 +3,36 @@
 @section('content')
 
     <main class="mt-5 mx-auto p-3 w-40">
+        <div class="card rounded-6 mb-3">
+            <img src="{{ asset('storage/images/result.jpg') }}" class="card-img-top rounded-6" alt="Result Banner">
+        </div>
         <div class="card title-card rounded-6 mb-3">
             <div class="card-body">
                 <div class="card-title">
-                    <h1 class="h2">Score - {{ $result->score }}% !</h1>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h1 class="h2">{{ $result->quiz->name }}</h1>
+                            <h5 class="text-muted">{{ $result->quiz->description }}</h5>
+                        </div>
+                        <div class="col-md-4">
+                            Total Score:  
+                            <span class="ml-2 h5">
+                                <span class="badge badge-primary">
+                                    {{ $result->score }}%
+                                </span>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <p class="card-text">
-                    {{ $result->quiz->name }}
-                </p>
             </div>
         </div>
+        
 
         <!--Participant Info Card-->
         <div class=" card rounded-6 mb-3 p-3">
             <div class="card-body w-75">
                 <div class="form-group">
-                    <label for="email">Your Email address<sup class="text-danger">*</sup>:</label><br>
+                    <label for="email" class="form-label">Your Email address<sup class="text-danger">*</sup>:</label><br>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"
                         value="{{ $result->email }}" readonly>
                 </div>
