@@ -95,7 +95,7 @@ class QuestionController extends Controller
             'correct_answer' => json_encode(request('correct_answers')),
             'answers' => json_encode(request('answer')),
             'quiz_id' => request('quiz_id'),
-            'questiontype_id' => request('questiontype_id')
+            'questiontype_id' => 2
         ]);
 
         return redirect()->route('edit-quiz', ['quiz_id' => request('quiz_id')]);
@@ -113,7 +113,8 @@ class QuestionController extends Controller
             'title' => request('question_title'),
             'correct_answer' => request('correct_answer'),
             'answers' => json_encode([0, 1]),
-            'quiz_id' => request('quiz_id')
+            'quiz_id' => request('quiz_id'),
+            'questiontype_id' => 3
         ]);
 
         return redirect()->route('edit-quiz', ['quiz_id' => request('quiz_id')]);
@@ -133,7 +134,8 @@ class QuestionController extends Controller
             'title' => request('question_title'),
             'correct_answer' => json_encode(simplifyArray(request('answer'))),
             'answers' => json_encode(request('answer')),
-            'quiz_id' => request('quiz_id')
+            'quiz_id' => request('quiz_id'),
+            'questiontype_id' => 4
         ]);
 
         return redirect()->route('edit-quiz', ['quiz_id' => request('quiz_id')]);

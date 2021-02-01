@@ -50,11 +50,7 @@
                                     <div class="skill-content">
                                         <h4>{{ $quiz->name }}</h4>
                                         <p>{{ $quiz->description }}</p>
-                                        <p class="text-warning mt-3">
-                                            <strong>{{ $quiz->quiztype->name }}: </strong>
-                                            <br>
-                                            {{ $quiz->quiztype->description }}
-                                        </p>
+                                        
                                     </div>
                                 </a>
                             </div>

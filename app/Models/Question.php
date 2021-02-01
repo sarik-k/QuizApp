@@ -22,16 +22,16 @@ class Question extends Model
 
     public function getView($quiz_id,$questiontype_id){
         if ($questiontype_id == 1) {
-            return 'admin/question/multiple-choice/create';
+            return 'admin/quiz/question/multiple-choice/create';
         }
         if ($questiontype_id == 2) {
-            return 'admin/question/multiple-response/create';
+            return 'admin/quiz/question/multiple-response/create';
         }
         if ($questiontype_id == 3) {
-            return 'admin/question/true-false/create';
+            return 'admin/quiz/question/true-false/create';
         }
         if ($questiontype_id == 4) {
-            return 'admin/question/short-text/create';
+            return 'admin/quiz/question/short-text/create';
         }
     }
 }

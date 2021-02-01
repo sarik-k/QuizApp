@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <strong>Question {{ $key + 1 }}:</strong> {{ $question->title }} <br>
+        @include('admin.quiz.answers.header')
         <hr>
         <div class="row">
             @foreach (json_decode($question->answers) as $k => $answer)

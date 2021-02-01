@@ -14,7 +14,7 @@
                     <hr>
                     <div class="card-body">
                         <form id="add_question_form" v-on:submit="validateForm" method="POST"
-                            action="{{ route('store-question-multiple-choice', ['quiz_id' => $quiz_id]) }}">
+                            action="{{ route('store-question-short-text', ['quiz_id' => $quiz_id]) }}">
                             @csrf
                             <input type="hidden" name="quiz_id" value="{{ $quiz_id }}">
                             <div class="row">
@@ -41,15 +41,11 @@
                                     <h4 class="mb-3">Answers Options:</h4>
                                     <table class="table table-bordered">
                                         <tr v-for="(answer,key) in answers" :key="key">
-                                            <td style="width: 40px">
-                                                <input type="radio" v-model="correctAnswer" name="correct_answer" :value="key"
-                                                    class="form-check-input">
-                                            </td>
                                             <td>
                                                 <div class="input-group input-group-navbar">
                                                     <input type="text" class="form-control" v-model="answer.content"
-                                                        placeholder="Answer Option" name="answer[]">
-                                                    <button v-show="key >= 2" class="btn text-danger" type="button"
+                                                        :placeholder="answer.placeholder" name="answer[]">
+                                                    <button v-show="key >= 1" class="btn text-danger" type="button"
                                                         v-on:click="removeAnswer(key)">
                                                         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor"
                                                             stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -62,7 +58,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    </table>
+                                    </table> 
 
                                     <button class="btn btn-success mb-3" v-on:click.prevent="addAnswer()">Add an
                                         answer</button>
@@ -105,46 +101,35 @@
 @endsection
 @section('scripts')
 
-    <script>
-        let app = new Vue({
+<script>
+    let app = new Vue({
         el: '#root',
         data: {
             question: '',
-            answers: [{
-                    content: ''
+            answers: [
+                {
+                    content: '',
+                    placeholder: 'Add an answer'
                 },
                 {
-                    content: ''
+                    content: '',
+                    placeholder: 'Add an alternate answer'
                 },
-                {
-                    content: ''
-                },
-                {
-                    content: ''
-                }
 
             ],
-
-            correctAnswer: null,
-            errors: []
+            errors: [],
 
         },
 
         methods: {
             addAnswer(key) {
                 let newAnswer = {
-                    content: ''
+                    content: '',
+                    placeholder: 'Add an alternate answer'
                 }; //Set new blank answer
                 this.answers.push(newAnswer); //Push to answers array
             },
             removeAnswer(key) {
-                if (this.correctAnswer == key) { //Clear correctAnswer if Correct Answer Option is removed
-                    this.correctAnswer = null;
-                } else if (this.correctAnswer >
-                    key
-                ) { //If removed answer is above correct answer, reduce correct answer value by one to match key
-                    this.correctAnswer--;
-                }
 
                 this.answers.splice(key, 1);
             },
@@ -169,10 +154,8 @@
 
                 //Simplify the array
                 array.forEach(answer => {
-                    stripped_answers_array.push(answer.content);
+                    stripped_answers_array.push(answer.content.toLowerCase());
                 });
-
-
 
                 //Check if there are duplicates
                 if (hasDuplicates(stripped_answers_array)) {
@@ -181,7 +164,25 @@
 
 
             },
+
+            checkIfAnswersLengthExceedsMaxLength(array, length) {
+
+                var too_long = false;
+
+                array.forEach(element => {
+                    if (element.content.length > length) {
+                        too_long = true
+                    }
+                });
+
+                if (too_long) {
+                    return true;
+                }
+            },
             validateForm: function(e) {
+
+
+
 
                 //Set error array to empty
                 this.errors = [];
@@ -189,11 +190,6 @@
                 //Check if user has entered a question
                 if (!this.question) {
                     this.errors.push("A Question is required.");
-                }
-
-                //Check if user has selected a correct answer
-                if (this.correctAnswer == null) {
-                    this.errors.push("Please select a correct answer.");
                 }
 
                 // Check if there are empty answers
@@ -208,6 +204,13 @@
                         "You cannot have duplicate answers!");
                 }
 
+                // Check if answer exceeds max length
+
+                if (this.checkIfAnswersLengthExceedsMaxLength(this.answers, 25)) {
+                    this.errors.push(
+                        "Answers cannot exceed 25 characters");
+                };
+
                 //Submit form if there are no errors
                 if (!this.errors.length) {
                     return true;
@@ -220,7 +223,6 @@
         }
     })
 
-
-    </script>
+</script>
 
 @endsection

@@ -30,6 +30,10 @@ class PagesController extends Controller
     {
 
         $quiz = Quiz::findOrFail($quiz_id);
+
+        return view('quiz.take', ["quiz" => $quiz]);
+
+        /* OLD CODE 
         if ($quiz->quiztype->id == 1) {
 
             if ($quiz->question->count() < 1) {
@@ -63,7 +67,7 @@ class PagesController extends Controller
 
             return view('quiz.shortText.take', ["quiz" => $quiz]);
         }
-
+        */
         abort('404');
     }
 
@@ -86,6 +90,8 @@ class PagesController extends Controller
             } else {
                 $is_correct = false;
             }
+
+            return
 
             //Write to $answers array
             array_push($answers, [
@@ -238,12 +244,12 @@ class PagesController extends Controller
 
             $is_correct = false;
 
-            //foreach ($request->answer[$key] as $index => $given_answer) {
+            
             if (in_array(simplifyAnswer($request->answer[$key]), json_decode($question->correct_answer))) {
                 $correct_answers++;
                 $is_correct = true;
             }
-            //}
+            
 
 
 

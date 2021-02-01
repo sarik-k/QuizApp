@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ResultController;
 
 
 /*
@@ -18,6 +19,9 @@ use App\Http\Controllers\PagesController;
 Route::get('/', [PagesController::class, 'home'])->name('homepage');
 Route::get('/quiz/{quiz_id}', [PagesController::class, 'takeQuiz'])->name('take-quiz');
 Route::get('/result/{result_id}', [PagesController::class, 'showResult'])->name('showResult');
+
+Route::post('/result/store', [ResultController::class, 'store'])->name('store-result');
+
 
 Route::post('/quiz/multiple-choice/submit', [PagesController::class, 'submitMultipleChoice'])->name('submit-quiz-multiple-choice');
 Route::post('/quiz/multiple-response/submit', [PagesController::class, 'submitMultipleResponse'])->name('submit-quiz-multiple-response');
