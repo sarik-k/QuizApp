@@ -8,8 +8,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    {{-- <h5 class="card-title mb-0">Dashboard</h5>
-                    --}}
+                    {{-- <h5 class="card-title mb-0">Dashboard</h5> --}}
                     <a href="{{ route('create-quiz') }}" class="btn btn-primary float-right"> + Create a Quiz</a>
                 </div>
                 <div class="card-body">
@@ -22,7 +21,7 @@
                             @can('do anything')
                                 <th>Created By</th>
                             @endcan
-                            <th>Actions</th>
+                            <th class="text-center">Actions</th>
                         </tr>
 
                         @forelse ($quizzes as $quiz)
@@ -34,8 +33,18 @@
                                 @can('do anything')
                                     <td>{{ $quiz->user->name }}</td>
                                 @endcan
-                                <td>
-                                    <a href="{{ route('edit-quiz', ['quiz_id' => $quiz->id]) }}">Edit</a>
+                                <td class="table-action text-center">
+                                     <form method="POST" action="{{ route('destroy-quiz', ['quiz_id' => $quiz->id]) }}"
+                                        onsubmit="return confirm('Do you really want to delete the quiz?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="{{ route('edit-quiz', ['quiz_id' => $quiz->id]) }}">
+                                            <i class="align-middle" data-feather="edit-2"></i>
+                                        </a>
+                                        <button class="btn btn-outline-link p-1" type="submit">
+                                            <i class="align-middle" data-feather="trash"></i>
+                                        </button>
+                                    </form> 
                                 </td>
 
                             </tr>

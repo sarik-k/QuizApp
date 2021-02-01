@@ -76,8 +76,9 @@ class ResultController extends Controller
 
                 if ($request->answer[$key] == $question->correct_answer) {
                     $total_correct_answers_given++; //Increase correct_answers counter for every correct answer
-                    // $total_score++; //Increase total score by 1 for each correct answer
                 }
+
+                $total_correct_answer_options++;
 
                 $answer = $this->result->getMultipleChoiceAnswers($request->answer[$key], $question);
                 array_push($answers, $answer);
@@ -101,6 +102,9 @@ class ResultController extends Controller
                 $is_correct = false;
                 $score = 0;
 
+                $total_correct_answer_options++;
+
+
                 if ($request->answer[$key] == $question->correct_answer) {
                     $total_correct_answers_given++; //Increase correct_answers counter for every correct answer
                     $is_correct = true;
@@ -114,7 +118,8 @@ class ResultController extends Controller
                     "given_answer" => $request->answer[$key],
                     "correct_answer" => $question->correct_answer,
                     "is_correct" => $is_correct,
-                    "score" => $score
+                    "score" => $score,
+                    "question_type" => 3
                 ]);
             }
 
@@ -122,6 +127,9 @@ class ResultController extends Controller
 
                 $is_correct = false;
                 $score = 0;
+
+                $total_correct_answer_options++;
+
 
                 if (in_array(simplifyAnswer($request->answer[$key]), json_decode($question->correct_answer))) {
                     $total_correct_answers_given++;
@@ -136,7 +144,8 @@ class ResultController extends Controller
                     "given_answer" => $request->answer[$key],
                     "correct_answers" => json_decode($question->correct_answer),
                     "is_correct" => $is_correct,
-                    "score" => $score
+                    "score" => $score,
+                    "question_type" => 4
                 ]);
             }
         }
@@ -153,13 +162,11 @@ class ResultController extends Controller
             "name" => request('name'),
             "answers" => json_encode($answers),
             "total_questions" => $total_questions,
-            "correct_answers" => $total_correct_answers_given,
-            "score" => $total_score
+            "correct_answers" => $total_correct_answers_given - $total_wrong_answers_given,
+            "score" => $total_score / $total_correct_answer_options * 100
         ]);
 
-        ddd($result);
-
-        return redirect()->route('showResult', ["result_id" => $result->id]);
+        return redirect()->route('show-result', ["result_id" => $result->id]);
     }
 
     /**
@@ -168,9 +175,13 @@ class ResultController extends Controller
      * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function show(Result $result)
+    public function show($result_id)
     {
-        //
+        
+        $result = Result::findOrFail($result_id);
+        $quiz = $result->quiz;
+
+        return view('quiz.result', ["result" => $result, "quiz" => $quiz]);
     }
 
     /**

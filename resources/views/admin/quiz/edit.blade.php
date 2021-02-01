@@ -3,14 +3,23 @@
 @section('content')
 
     <div id="main">
-        <h1 class="h3 ">Quiz Editor </h1>
+        <div class="row mb-3">
+            <div class="col-12">
+                <h1 class="h3 mb-3 d-inline">Quiz Editor </h1>
+        
+                <a href="{{ route('list-quiz') }}" class="btn btn-outline-secondary float-right">Back to Quiz List</a>
+            </div>
+            
+        </div>
+        
+        
 
         <div class="row">
             <div class="col-md-4">
                 @include('admin.quiz.sidebar')
             </div>
-            <div class="col-8">
-                <div class="card">
+            <div class="col-md-8 ">
+                <div class="card min-vh-50">
                     <div class="card-header">
 
                         <!-- Add Question Trigger Button -->
@@ -20,7 +29,7 @@
                         </button> --}}
                         <div class="btn-group float-right" role="group">
                             <button id="add-question-button" type="button"
-                                class="btn btn-primary dropdown-toggle float-right" data-bs-toggle="dropdown">
+                                class="btn btn-primary dropdown-toggle float-right" data-bs-toggle="dropdown" >
                                 + Add a Question
                             </button>
                             <ul class="dropdown-menu">
@@ -48,31 +57,6 @@
                                         Short Text
                                     </a>
                                 </li>
-                                {{-- <li>
-                                    <button class="btn btn-light w-100" data-bs-toggle="modal"
-                                        data-bs-target="#multipleChoice">
-                                        Multiple Choice
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="btn btn-light w-100" data-bs-toggle="modal"
-                                        data-bs-target="#multipleResponse">
-                                        Multiple Response
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="btn btn-light w-100" data-bs-toggle="modal"
-                                        data-bs-target="#trueFalse">
-                                        True or False
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="btn btn-light w-100" data-bs-toggle="modal"
-                                        data-bs-target="#Short Text">
-                                        Short Text
-                                    </button>
-                                </li> --}}
-
                             </ul>
                         </div>
                     </div>
@@ -104,6 +88,7 @@
                                 @include('admin.quiz.answers.shortText')
 
                             @endif
+
 
                         @empty
                             Start by adding a Question!

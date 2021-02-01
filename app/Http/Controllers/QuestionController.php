@@ -181,8 +181,12 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
+    public function destroy($question_id)
     {
         //
+        $question = Question::findOrFail($question_id);
+        Question::destroy($question_id);
+        return back()
+            ->with('success','Quiz Deleted!');
     }
 }

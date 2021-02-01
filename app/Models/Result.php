@@ -33,7 +33,8 @@ class Result extends Model
             "given_answer" => $givenAnswer,
             "correct_answer" => $question->correct_answer,
             "is_correct" => $is_correct,
-            "score" => $score
+            "score" => $score,
+            "question_type" => 1
         ];
     }
 
@@ -60,7 +61,8 @@ class Result extends Model
             "correct_answers" => json_decode($question->correct_answer),
             "no_of_correct_answers_given" => $no_of_correct_answers_given,
             "no_of_wrong_answers_given" => $no_of_wrong_answers_given,
-            "score" => $score
+            "score" => $score,
+            "question_type" => 2
         ];
     }
 }

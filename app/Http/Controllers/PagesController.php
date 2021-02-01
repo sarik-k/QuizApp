@@ -16,7 +16,7 @@ class PagesController extends Controller
 
     public function __construct()
     {
-        //$this->middleware('auth', ['except' => ['index', 'show']]); //Make all functions pass through auth middleware, except those mentioned
+        $this->middleware('auth', ['except' => ['index', 'show']]); //Make all functions pass through auth middleware, except those mentioned
         $this->quiz = new Quiz;
     }
 
@@ -33,42 +33,6 @@ class PagesController extends Controller
 
         return view('quiz.take', ["quiz" => $quiz]);
 
-        /* OLD CODE 
-        if ($quiz->quiztype->id == 1) {
-
-            if ($quiz->question->count() < 1) {
-                abort('404');
-            }
-
-            return view('quiz.multipleChoice.take', ["quiz" => $quiz]);
-        }
-        if ($quiz->quiztype->id == 2) {
-
-            if ($quiz->question->count() < 1) {
-                abort('404');
-            }
-
-            return view('quiz.multipleResponse.take', ["quiz" => $quiz]);
-        }
-        if ($quiz->quiztype->id == 3) {
-
-            if ($quiz->question->count() < 1) {
-                abort('404');
-            }
-
-            return view('quiz.trueFalse.take', ["quiz" => $quiz]);
-        }
-
-        if ($quiz->quiztype->id == 4) {
-
-            if ($quiz->question->count() < 1) {
-                abort('404');
-            }
-
-            return view('quiz.shortText.take', ["quiz" => $quiz]);
-        }
-        */
-        abort('404');
     }
 
     public function submitMultipleChoice(SubmitMultipleChoiceQuestionRequest $request)

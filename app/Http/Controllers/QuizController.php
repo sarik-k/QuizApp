@@ -118,9 +118,27 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quiz $quiz)
+    public function update(Request $request, $quiz_id)
     {
         //
+        $request->validate([
+            'title' => 'required|string|max:100'
+        ]);
+        
+
+
+        $quiz = Quiz::findOrFail($quiz_id);
+        
+
+
+        $quiz->update([
+            'name' => request('title'),
+            'description' => request('description')
+        ]);
+
+        return back()
+            ->with('success', 'Quiz Updated');
+
     }
 
     /**
@@ -129,8 +147,11 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Quiz $quiz)
+    public function destroy($quiz_id)
     {
         //
+        Quiz::destroy($quiz_id);
+        return redirect()->route('list-quiz')
+            ->with('success','Quiz Deleted!');
     }
 }

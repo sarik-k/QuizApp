@@ -18,15 +18,14 @@ use App\Http\Controllers\ResultController;
 
 Route::get('/', [PagesController::class, 'home'])->name('homepage');
 Route::get('/quiz/{quiz_id}', [PagesController::class, 'takeQuiz'])->name('take-quiz');
-Route::get('/result/{result_id}', [PagesController::class, 'showResult'])->name('showResult');
-
+Route::get('/result/{result_id}', [ResultController::class, 'show'])->name('show-result');
 Route::post('/result/store', [ResultController::class, 'store'])->name('store-result');
 
 
-Route::post('/quiz/multiple-choice/submit', [PagesController::class, 'submitMultipleChoice'])->name('submit-quiz-multiple-choice');
-Route::post('/quiz/multiple-response/submit', [PagesController::class, 'submitMultipleResponse'])->name('submit-quiz-multiple-response');
-Route::post('/quiz/true-false/submit', [PagesController::class, 'submitTrueFalse'])->name('submit-quiz-true-false');
-Route::post('/quiz/short-text/submit', [PagesController::class, 'submitShortText'])->name('submit-quiz-short-text');
+//Route::post('/quiz/multiple-choice/submit', [PagesController::class, 'submitMultipleChoice'])->name('submit-quiz-multiple-choice');
+//Route::post('/quiz/multiple-response/submit', [PagesController::class, 'submitMultipleResponse'])->name('submit-quiz-multiple-response');
+//Route::post('/quiz/true-false/submit', [PagesController::class, 'submitTrueFalse'])->name('submit-quiz-true-false');
+//Route::post('/quiz/short-text/submit', [PagesController::class, 'submitShortText'])->name('submit-quiz-short-text');
 
 
 
