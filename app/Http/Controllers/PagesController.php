@@ -16,7 +16,7 @@ class PagesController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]); //Make all functions pass through auth middleware, except those mentioned
+        $this->middleware('auth', ['except' => ['home','index', 'show']]); //Make all functions pass through auth middleware, except those mentioned
         $this->quiz = new Quiz;
     }
 
