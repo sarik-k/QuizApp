@@ -66,13 +66,12 @@ class QuizController extends Controller
      */
     public function store(StoreQuizRequest $request)
     {
-        //
+
         $request->validated(); //Validate Request using Form Request
 
         $newQuiz = Quiz::create([
             'name' => request('quiz_title'),
             'description' => request('quiz_description'),
-            'quiztype_id' => request('quiz_type'),
             'user_id' => auth()->user()->id
         ]);
 
@@ -108,26 +107,8 @@ class QuizController extends Controller
         if(!auth()->user()->can('update',$quiz)){
             abort('403');
         }
-
-        //Multiple Choice
-        if ($quiz->quiztype->id == 1) {
-            return view('admin.quiz.multipleChoice.edit', ['quiz' => $quiz]);
-        }
-
-        //Multiple Response
-        if ($quiz->quiztype->id == 2) {
-            return view('admin.quiz.multipleResponse.edit', ['quiz' => $quiz]);
-        }
-
-        //True False
-        if ($quiz->quiztype->id == 3) {
-            return view('admin.quiz.trueFalse.edit', ['quiz' => $quiz]);
-        }
-
-        //Short Text
-        if ($quiz->quiztype->id == 4) {
-            return view('admin.quiz.shortText.edit', ['quiz' => $quiz]);
-        }
+            return view('admin.quiz.edit', ['quiz' => $quiz]);
+        
     }
 
     /**

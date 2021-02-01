@@ -1,12 +1,12 @@
 <?php
 
 namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
-use Illuminate\Database\Seeder;
-
-class QuiztypeSeeder extends Seeder
+class QuestionTypesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,25 +16,21 @@ class QuiztypeSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('quiztypes')->insert([
+        DB::table('questiontypes')->insert([
             'name' => 'Multiple Choice',
             'description' => 'One correct answer'
         ]);
-        DB::table('quiztypes')->insert([
+        DB::table('questiontypes')->insert([
             'name' => 'Multiple Response',
             'description' => 'More than one correct answers'
         ]);
-        DB::table('quiztypes')->insert([
+        DB::table('questiontypes')->insert([
             'name' => 'True or False',
             'description' => 'One correct answer'
         ]);
-        DB::table('quiztypes')->insert([
+        DB::table('questiontypes')->insert([
             'name' => 'Short Text',
             'description' => 'Requires exact match'
-        ]);
-        DB::table('quiztypes')->insert([
-            'name' => 'Any',
-            'description' => 'Mix and Match'
         ]);
     }
 }

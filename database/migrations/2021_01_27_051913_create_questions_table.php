@@ -20,6 +20,7 @@ class CreateQuestionsTable extends Migration
             $table->string('title');
             $table->json('answers');
             $table->string('correct_answer');
+            $table->integer('questiontype_id');
         });
     }
 

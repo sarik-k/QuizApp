@@ -27,7 +27,6 @@ class StoreQuizRequest extends FormRequest
             //
             'quiz_title' => 'required|string|max:255',
             'quiz_description' => 'required|string|max:255',
-            'quiz_type' => 'required'
         ];
     }
 }

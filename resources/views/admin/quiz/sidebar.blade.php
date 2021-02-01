@@ -1,12 +1,6 @@
 <div class="card min-vh-50">
     <div class="card-body">
         <h4>{{ $quiz->name }}</h4>
-        <p class="h5 mb-3">
-            {{ $quiz->quiztype->name }} -
-            <small class="text-muted">
-                {{ $quiz->quiztype->description }}
-            </small>
-        </p>
         <hr>
         <h4>Share Quiz:</h4>
 

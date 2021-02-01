@@ -23,7 +23,9 @@ class trueFalseQuestionSeeder extends Seeder
                 0,
                 1
             ]),
-            'correct_answer' => 1
+            'correct_answer' => 1,
+            'questiontype_id' => 3
+
         ]);
         DB::table('questions')->insert([
             'quiz_id' => 3,
@@ -32,7 +34,9 @@ class trueFalseQuestionSeeder extends Seeder
                 0,
                 1
             ]),
-            'correct_answer' => 0
+            'correct_answer' => 0,
+            'questiontype_id' => 3
+
         ]);
         DB::table('questions')->insert([
             'quiz_id' => 3,
@@ -41,7 +45,9 @@ class trueFalseQuestionSeeder extends Seeder
                 0,
                 1
             ]),
-            'correct_answer' => 1
+            'correct_answer' => 1,
+            'questiontype_id' => 3
+
         ]);
         DB::table('questions')->insert([
             'quiz_id' => 3,
@@ -50,7 +56,9 @@ class trueFalseQuestionSeeder extends Seeder
                 0,
                 1
             ]),
-            'correct_answer' => 1
+            'correct_answer' => 1,
+            'questiontype_id' => 3
+
         ]);
         DB::table('questions')->insert([
             'quiz_id' => 3,
@@ -59,7 +67,9 @@ class trueFalseQuestionSeeder extends Seeder
                 0,
                 1
             ]),
-            'correct_answer' => 0
+            'correct_answer' => 0,
+            'questiontype_id' => 3
+
         ]);
     }
 }

@@ -50,40 +50,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label for="quiz_type" class="form-label">Select a Quiz Type:</label>
-
-                                    {{-- Loop through Quiz Types
-                                    --}}
-                                    @forelse ($quiztypes as $quiztype)
-                                        <div class="form-check">
-                                            <input type="radio" name="quiz_type" value="{{ $quiztype->id }}"
-                                                class="form-check-input" id="{{ $quiztype->id }}">
-                                            <label for="{{ $quiztype->id }}" class="form-label">
-                                                <strong>{{ $quiztype->name }}</strong> - {{ $quiztype->description }}
-                                            </label>
-                                        </div>
-
-                                    @empty
-                                        <div class="alert alert-danger">No Quiz Types</div>
-                                    @endforelse
-
-                                    {{-- Validation Error Message
-                                    --}}
-                                    @error('quiz_type')
-                                        <div class="alert alert-danger alert-dismissible" role="alert">
-                                            <button type="button" class="btn-close" data-dismiss="alert"
-                                                aria-label="Close"></button>
-                                            <div class="alert-message">
-                                                {{ $message }}
-                                            </div>
-                                        </div>
-
-                                    @enderror
-
-                                </div>
-                            </div>
+                            
 
                             {{-- Create Quiz Button --}}
                             <div class="mb-3">

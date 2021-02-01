@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div id="root">
+    <div id="main">
         <h1 class="h3 ">Quiz Editor </h1>
 
         <div class="row">
@@ -14,50 +14,97 @@
                     <div class="card-header">
 
                         <!-- Add Question Trigger Button -->
-                        <button type="button" class="btn btn-primary float-right" data-bs-toggle="modal"
-                            data-bs-target="#addQuestion">
+                        {{-- <button type="button" class="btn btn-primary float-right" data-bs-toggle="modal"
+                            data-bs-target="#selectType">
                             + Add a Question
-                        </button>
+                        </button> --}}
+                        <div class="btn-group float-right" role="group">
+                            <button id="add-question-button" type="button"
+                                class="btn btn-primary dropdown-toggle float-right" data-bs-toggle="dropdown">
+                                + Add a Question
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ route('create-question', ['quiz_id' => $quiz->id,'questiontype_id' => 1]) }}"
+                                        class="btn btn-light w-100">
+                                        Multiple Choice
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('create-question', ['quiz_id' => $quiz->id,'questiontype_id' => 2]) }}"
+                                        class="btn btn-light w-100">
+                                        Multiple Response
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('create-question', ['quiz_id' => $quiz->id,'questiontype_id' => 3]) }}"
+                                        class="btn btn-light w-100">
+                                        True or False
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('create-question', ['quiz_id' => $quiz->id,'questiontype_id' => 4]) }}"
+                                        class="btn btn-light w-100">
+                                        Short Text
+                                    </a>
+                                </li>
+                                {{-- <li>
+                                    <button class="btn btn-light w-100" data-bs-toggle="modal"
+                                        data-bs-target="#multipleChoice">
+                                        Multiple Choice
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="btn btn-light w-100" data-bs-toggle="modal"
+                                        data-bs-target="#multipleResponse">
+                                        Multiple Response
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="btn btn-light w-100" data-bs-toggle="modal"
+                                        data-bs-target="#trueFalse">
+                                        True or False
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="btn btn-light w-100" data-bs-toggle="modal"
+                                        data-bs-target="#Short Text">
+                                        Short Text
+                                    </button>
+                                </li> --}}
+
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="card-body">
 
-                        @include('admin.quiz.multipleResponse.addQuestion')
-
-
-
-
                         @forelse ($quiz->question as $key => $question)
-                            <div class="card">
-                                <div class="card-body">
-                                    <strong>Question {{ $key + 1 }}:</strong> {{ $question->title }} <br>
-                                    <hr>
-                                    <div class="row">
-                                        @foreach (json_decode($question->answers) as $k => $answer)
-                                            <div class="col-6">
 
-                                                @if (in_array($k, json_decode($question->correct_answer)))
+                            @if ($question->questiontype->id == 1)
 
-                                                    <div class="mb-3 text-success h4">
-                                                        <i class="far fa-fw fa-check-circle"></i> {{ $answer }}
-                                                    </div>
+                                @include('admin.quiz.answers.multipleChoice')
 
-                                                @else
+                            @endif
 
-                                                    <div class="mb-3 text-danger h4">
-                                                        <i class="far fa-fw fa-times-circle"></i> {{ $answer }}
-                                                    </div>
+                            @if ($question->questiontype->id == 2)
 
-                                                @endif
+                                @include('admin.quiz.answers.multipleResponse')
 
+                            @endif
 
-                                            </div>
-                                        @endforeach
+                            @if ($question->questiontype->id == 3)
 
-                                    </div>
+                                @include('admin.quiz.answers.trueFalse')
 
-                                </div>
-                            </div>
+                            @endif
+
+                            @if ($question->questiontype->id == 4)
+
+                                @include('admin.quiz.answers.shortText')
+
+                            @endif
+
                         @empty
                             Start by adding a Question!
                         @endforelse
@@ -75,7 +122,7 @@
 
 <script>
     let app = new Vue({
-        el: '#root',
+        el: '#main',
         data: {
             question: '',
             answers: [{
@@ -168,11 +215,11 @@
                 }
 
                 //Check if user has selected a correct answer
+                console.log(this.correctAnswers);
                 if (!this.checkIfCorrectAnswerIsSelected(this.correctAnswers)) {
                     this.errors.push("Please select atleast one correct answer.");
                 }
 
-                console.log(this.correctAnswers);
 
                 //if (this.correctAnswers == null) {
                 //    this.errors.push("Please select a correct answer.");
@@ -205,7 +252,9 @@
                 try {
                     var successful = document.execCommand('copy');
                     this.copyMessage = 'copied!';
-                    setTimeout(() => {  this.copyMessage = 'copy'; }, 1000);
+                    setTimeout(() => {
+                        this.copyMessage = 'copy';
+                    }, 1000);
                 } catch (err) {
                     alert('Oops, unable to copy');
                 }

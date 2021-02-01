@@ -25,7 +25,8 @@ class MultipleChoiceQuestionSeeder extends Seeder
                 "A JavaScript Framework",
                 "A CSS Framework"
             ]),
-            'correct_answer' => 1
+            'correct_answer' => 1,
+            'questiontype_id' => 1
         ]);
 
         DB::table('questions')->insert([
@@ -37,7 +38,9 @@ class MultipleChoiceQuestionSeeder extends Seeder
                 "$",
                 "&"
             ]),
-            'correct_answer' => 0
+            'correct_answer' => 0,
+            'questiontype_id' => 1
+
         ]);
 
         DB::table('questions')->insert([
@@ -48,7 +51,9 @@ class MultipleChoiceQuestionSeeder extends Seeder
                 "Antler",
                 "Blade"
             ]),
-            'correct_answer' => 2
+            'correct_answer' => 2,
+            'questiontype_id' => 1
+
         ]);
 
         DB::table('questions')->insert([
@@ -60,7 +65,9 @@ class MultipleChoiceQuestionSeeder extends Seeder
                 "Taylor Otwell",
                 "Jordan Walke"
             ]),
-            'correct_answer' => 2
+            'correct_answer' => 2,
+            'questiontype_id' => 1
+
         ]);
 
         DB::table('questions')->insert([
@@ -72,7 +79,9 @@ class MultipleChoiceQuestionSeeder extends Seeder
                 "September 2021",
                 "December 2021"
             ]),
-            'correct_answer' => 2
+            'correct_answer' => 2,
+            'questiontype_id' => 1
+
         ]);
 
         DB::table('questions')->insert([
@@ -84,7 +93,9 @@ class MultipleChoiceQuestionSeeder extends Seeder
                 "home.php",
                 "api.php"
             ]),
-            'correct_answer' => 0
+            'correct_answer' => 0,
+            'questiontype_id' => 1
+
         ]);
 
         DB::table('questions')->insert([
@@ -96,7 +107,9 @@ class MultipleChoiceQuestionSeeder extends Seeder
                 "php artisan build:controller",
                 "php artisan make:controller"
             ]),
-            'correct_answer' => 3
+            'correct_answer' => 3,
+            'questiontype_id' => 1
+
         ]);
 
         DB::table('questions')->insert([
@@ -108,7 +121,9 @@ class MultipleChoiceQuestionSeeder extends Seeder
                 "Defaults",
                 "None of the Above"
             ]),
-            'correct_answer' => 1
+            'correct_answer' => 1,
+            'questiontype_id' => 1
+
         ]);
     }
 }

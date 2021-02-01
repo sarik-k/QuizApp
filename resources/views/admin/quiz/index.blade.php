@@ -19,7 +19,6 @@
                             <th>Id</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Quiz Type</th>
                             @can('do anything')
                                 <th>Created By</th>
                             @endcan
@@ -32,7 +31,6 @@
                                 <td>{{ $quiz->id }}</td>
                                 <td>{{ $quiz->name }}</td>
                                 <td>{{ $quiz->description }}</td>
-                                <td>{{ $quiz->quiztype->name }}</td>
                                 @can('do anything')
                                     <td>{{ $quiz->user->name }}</td>
                                 @endcan

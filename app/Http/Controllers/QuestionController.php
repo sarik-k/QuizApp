@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+
+    protected $question;
+
+    public function __construct()
+    {
+        $this->question = new Question;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,27 +32,24 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($quiz_id,$questiontype_id)
     {
-        //
+        $quiz = Quiz::findOrFail($quiz_id);
+
+        $view = $this->question->getView($quiz_id,$questiontype_id);
+
+        return view($view)
+            ->with('quiz_id', $quiz->id);
+
     }
 
     public function create_multiple_choice($quiz_id)
     {
-        //
 
-        /* Deprecetad 
         $quiz = Quiz::findOrFail($quiz_id);
 
-        
-        if ($quiz->quiztype_id == 1) {
-            return view('admin/question/multiple-choice/create')
-            ->with('quiz_id',$quiz->id);
-
-        } else {
-            abort(404);
-        }
-        */
+        return view('admin/question/multiple-choice/create')
+            ->with('quiz_id', $quiz->id);
     }
 
     /**
@@ -54,6 +58,7 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         //
@@ -64,35 +69,36 @@ class QuestionController extends Controller
         //
         $request->validated();
 
-        // ddd(request('question_title'));
-        
-        
+        //ddd(request('questiontype_id'));
+
+
         Question::create([
             'title' => request('question_title'),
             'correct_answer' => request('correct_answer'),
-            'answers' => json_encode(request('answer')) ,
-            'quiz_id' => request('quiz_id')
+            'answers' => json_encode(request('answer')),
+            'questiontype_id' => 1,
+            'quiz_id' => request('quiz_id'),
+
         ]);
-        
+
         return redirect()->route('edit-quiz', ['quiz_id' => request('quiz_id')]);
-        
     }
 
     public function store_multiple_response(StoreMultipleResponseQuestionRequest $request)
     {
         //
         $request->validated();
-        
-        
+
+
         Question::create([
             'title' => request('question_title'),
             'correct_answer' => json_encode(request('correct_answers')),
-            'answers' => json_encode(request('answer')) ,
-            'quiz_id' => request('quiz_id')
+            'answers' => json_encode(request('answer')),
+            'quiz_id' => request('quiz_id'),
+            'questiontype_id' => request('questiontype_id')
         ]);
-        
+
         return redirect()->route('edit-quiz', ['quiz_id' => request('quiz_id')]);
-        
     }
 
     public function store_true_false(Request $request)
@@ -101,17 +107,16 @@ class QuestionController extends Controller
         //$request->validated();
 
         // ddd(request('question_title'));
-        
-        
+
+
         $question = Question::create([
             'title' => request('question_title'),
             'correct_answer' => request('correct_answer'),
-            'answers' => json_encode([0,1]) ,
+            'answers' => json_encode([0, 1]),
             'quiz_id' => request('quiz_id')
         ]);
-        
+
         return redirect()->route('edit-quiz', ['quiz_id' => request('quiz_id')]);
-        
     }
 
     public function store_short_text(Request $request)
@@ -121,18 +126,17 @@ class QuestionController extends Controller
 
         //ddd($request->request);
 
-        
 
-        
+
+
         Question::create([
             'title' => request('question_title'),
             'correct_answer' => json_encode(simplifyArray(request('answer'))),
-            'answers' => json_encode(request('answer')) ,
+            'answers' => json_encode(request('answer')),
             'quiz_id' => request('quiz_id')
         ]);
-        
+
         return redirect()->route('edit-quiz', ['quiz_id' => request('quiz_id')]);
-        
     }
 
     /**

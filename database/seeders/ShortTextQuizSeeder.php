@@ -24,7 +24,9 @@ class ShortTextQuizSeeder extends Seeder
             ),
             'correct_answer' => json_encode(
                 ["hydrozen"]
-            )
+            ),
+            'questiontype_id' => 4
+
         ]);
         DB::table('questions')->insert([
             'quiz_id' => 4,
@@ -34,7 +36,9 @@ class ShortTextQuizSeeder extends Seeder
             ),
             'correct_answer' => json_encode(
                 ["2", "two"]
-            )
+            ),
+            'questiontype_id' => 4
+
         ]);
         DB::table('questions')->insert([
             'quiz_id' => 4,
@@ -44,7 +48,9 @@ class ShortTextQuizSeeder extends Seeder
             ),
             'correct_answer' => json_encode(
                 ["equator"]
-            )
+            ),
+            'questiontype_id' => 4
+
         ]);
         DB::table('questions')->insert([
             'quiz_id' => 4,
@@ -54,7 +60,9 @@ class ShortTextQuizSeeder extends Seeder
             ),
             'correct_answer' => json_encode(
                 ["2", "two"]
-            )
+            ),
+            'questiontype_id' => 4
+
         ]);
         DB::table('questions')->insert([
             'quiz_id' => 4,
@@ -64,7 +72,9 @@ class ShortTextQuizSeeder extends Seeder
             ),
             'correct_answer' => json_encode(
                 ["london"]
-            )
+            ),
+            'questiontype_id' => 4
+
         ]);
     }
 }

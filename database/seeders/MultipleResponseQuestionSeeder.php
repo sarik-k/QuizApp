@@ -29,7 +29,9 @@ class MultipleResponseQuestionSeeder extends Seeder
                 "0",
                 "1",
                 "2"
-            ])
+            ]),
+            'questiontype_id' => 2
+
         ]);
 
         DB::table('questions')->insert([
@@ -44,7 +46,9 @@ class MultipleResponseQuestionSeeder extends Seeder
             'correct_answer' => json_encode([
                 "1",
                 "3",
-            ])
+            ]),
+            'questiontype_id' => 2
+
         ]);
 
         DB::table('questions')->insert([
@@ -58,7 +62,9 @@ class MultipleResponseQuestionSeeder extends Seeder
             ]),
             'correct_answer' => json_encode([
                 "0"
-            ])
+            ]),
+            'questiontype_id' => 2
+
         ]);
 
         DB::table('questions')->insert([
@@ -73,7 +79,9 @@ class MultipleResponseQuestionSeeder extends Seeder
             'correct_answer' => json_encode([
                 "2",
                 "3",
-            ])
+            ]),
+            'questiontype_id' => 2
+
         ]);
 
         DB::table('questions')->insert([
@@ -89,7 +97,9 @@ class MultipleResponseQuestionSeeder extends Seeder
                 "0",
                 "1",
                 "3"
-            ])
+            ]),
+            'questiontype_id' => 2
+
         ]);
 
         
