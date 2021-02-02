@@ -26,7 +26,7 @@
                                             {{ $error }} <br>
                                         @endforeach
                                     </div>
-                                    
+
                                 @endif
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
@@ -41,12 +41,15 @@
                                         <input class="form-control form-control-lg" type="password" name="password"
                                             placeholder="Enter your password" id="password" required
                                             autocomplete="current-password" />
-                                        <small>
+                                        {{-- <small>
                                             <a href="{{ route('password.request') }}"">Forgot password?</a>
-                                                            </small>
-                                                        </div>
-                                                        <div>
-                                                            <label class=" form-check">
+                                                            </small> --}}
+                                        <small>
+                                            <a href="{{ route('register') }}"">Not registered yet?</a>
+                                                                                    </small>
+                                                            </div>
+                                                            <div>
+                                                                <label class=" form-check">
                                                 <input class="form-check-input" type="checkbox" value="remember-me" checked
                                                     id="remember_me" name="remember">
                                                 <span class="form-check-label">
@@ -73,7 +76,7 @@
                                             Password: password
                                         </div>
                                     </div>
-                                    
+
 
                                 </form>
                             </div>
