@@ -1,7 +1,7 @@
 
 # QuizApp
 
-## About Quiz
+## About QuizApp
 
 QuizApp is a Laravel based project that allows you to create Quizzes and share them to your anyone!
 
