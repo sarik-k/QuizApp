@@ -5,6 +5,18 @@
 
 QuizApp is a Laravel based project that allows you to create Quizzes and share them to your anyone!
 
+## Demo:
+
+http://quiz-app-324.herokuapp.com/
+
+**Demo Super Admin credentials:**
+**Email**: superadmin@superadmin.com
+**Password**: password
+
+**Demo Admin credentials:**
+**Email**: admin@admin.com
+**Password**: password
+
 ## Features
 
 - Create Quiz and add Questions from one of four types (Multiple choice, Multiple Response, True/False and Short Text)
